@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:canteen/backgrounds/signup_bg.dart';
+import 'package:http/http.dart' as http;
 
 class Registerpage extends StatefulWidget {
   const Registerpage({super.key});
@@ -17,7 +18,23 @@ class _RegisterpageState extends State<Registerpage> {
     TextEditingController mobiletextcontroller = TextEditingController();
     TextEditingController nametextcontroller = TextEditingController();
     TextEditingController passwordtextcontroller = TextEditingController();
-    TextEditingController Addresstextcontroller = TextEditingController();
+    TextEditingController addresstextcontroller = TextEditingController();
+
+    void registeruser() async {
+      if (mobiletextcontroller.text.isNotEmpty &&
+          nametextcontroller.text.isNotEmpty &&
+          passwordtextcontroller.text.isNotEmpty &&
+          addresstextcontroller.text.isNotEmpty &&
+          selectedOption!.isNotEmpty) {
+        var regbody = {
+          "mobile_number": mobiletextcontroller.text,
+          "name": nametextcontroller.text,
+          "faculty": selectedOption,
+          "address": addresstextcontroller.text,
+          "password": passwordtextcontroller.text
+        };
+      }
+    }
 
     Size size = MediaQuery.of(context).size;
 
@@ -194,7 +211,7 @@ class _RegisterpageState extends State<Registerpage> {
                   borderRadius: BorderRadius.circular(30.0),
                 ),
                 child: TextField(
-                  controller: Addresstextcontroller,
+                  controller: addresstextcontroller,
                   maxLines: 2,
                   minLines: 2,
                   style: TextStyle(
