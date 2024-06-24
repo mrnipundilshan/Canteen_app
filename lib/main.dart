@@ -1,4 +1,4 @@
-import 'package:canteen/backgrounds/signup_bg.dart';
+import 'package:canteen/registerpage.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,18 +14,6 @@ class MyApp extends StatelessWidget {
       title: "Canteen App",
       debugShowCheckedModeBanner: false,
       home: Registerpage(),
-    );
-  }
-}
-
-class Registerpage extends StatelessWidget {
-  const Registerpage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Background(child: Text("uouou")),
     );
   }
 }
