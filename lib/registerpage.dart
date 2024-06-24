@@ -34,6 +34,25 @@ class Registerpage extends StatelessWidget {
                   fontSize: size.width * 0.1,
                   color: const Color.fromRGBO(60, 121, 98, 1.0)),
             ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              width: size.width * 0.8,
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(119, 187, 162, 1.0),
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+              child: const TextField(
+                textAlign: TextAlign.center,
+                cursorColor: Color.fromRGBO(60, 121, 98, 1.0),
+                decoration: InputDecoration(
+                  hintText: "Mobile Number",
+                  hintStyle: TextStyle(
+                      color: Color.fromRGBO(60, 121, 98, 1.0),
+                      fontWeight: FontWeight.bold),
+                  border: InputBorder.none,
+                ),
+              ),
+            )
           ],
         ),
       )),
