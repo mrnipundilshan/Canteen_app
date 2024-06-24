@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:canteen/backgrounds/signup_bg.dart';
 
-class Registerpage extends StatelessWidget {
+class Registerpage extends StatefulWidget {
   const Registerpage({super.key});
 
   @override
+  State<Registerpage> createState() => _RegisterpageState();
+}
+
+class _RegisterpageState extends State<Registerpage> {
+  @override
   Widget build(BuildContext context) {
     TextEditingController mobiletextcontroller = TextEditingController();
+    TextEditingController nametextcontroller = TextEditingController();
+    TextEditingController facultytextcontroller = TextEditingController();
+    TextEditingController passwordtextcontroller = TextEditingController();
+    TextEditingController Addresstextcontroller = TextEditingController();
+
+    String? selectedOption;
+    List<String> options = ["Option 1", "Option 2", "Option 3"];
 
     Size size = MediaQuery.of(context).size;
 
@@ -47,7 +59,7 @@ class Registerpage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 width: size.width * 0.8,
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(119, 187, 162, 1.0),
+                  color: const Color.fromRGBO(119, 187, 162, 1.0),
                   borderRadius: BorderRadius.circular(30.0),
                 ),
                 child: TextField(
@@ -74,7 +86,7 @@ class Registerpage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 width: size.width * 0.8,
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(119, 187, 162, 1.0),
+                  color: const Color.fromRGBO(119, 187, 162, 1.0),
                   borderRadius: BorderRadius.circular(30.0),
                 ),
                 child: TextField(
@@ -98,24 +110,44 @@ class Registerpage extends StatelessWidget {
               ),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                alignment: Alignment.center,
                 width: size.width * 0.8,
+                height: size.height * 0.055,
                 decoration: BoxDecoration(
                   color: Color.fromRGBO(119, 187, 162, 1.0),
                   borderRadius: BorderRadius.circular(30.0),
                 ),
-                child: TextField(
-                  style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      color: const Color.fromRGBO(60, 121, 98, 1.0),
-                      fontSize: size.height * 0.02),
-                  textAlign: TextAlign.center,
-                  cursorColor: const Color.fromRGBO(60, 121, 98, 1.0),
-                  decoration: const InputDecoration(
-                    hintText: "Faculty",
-                    hintStyle: TextStyle(
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    value: selectedOption,
+                    hint: Text(
+                      "Select Faculty",
+                      style: TextStyle(
                         color: Color.fromRGBO(60, 121, 98, 1.0),
-                        fontWeight: FontWeight.bold),
-                    border: InputBorder.none,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    isExpanded: true,
+                    icon: Icon(Icons.arrow_drop_down,
+                        color: Color.fromRGBO(60, 121, 98, 1.0)),
+                    dropdownColor: Color.fromRGBO(119, 187, 162, 1.0),
+                    items: options.map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: TextStyle(
+                            color: Color.fromRGBO(60, 121, 98, 1.0),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        selectedOption = newValue;
+                      });
+                    },
                   ),
                 ),
               ),
@@ -126,7 +158,7 @@ class Registerpage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 width: size.width * 0.8,
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(119, 187, 162, 1.0),
+                  color: const Color.fromRGBO(119, 187, 162, 1.0),
                   borderRadius: BorderRadius.circular(30.0),
                 ),
                 child: TextField(
@@ -152,7 +184,7 @@ class Registerpage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 width: size.width * 0.8,
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(119, 187, 162, 1.0),
+                  color: const Color.fromRGBO(119, 187, 162, 1.0),
                   borderRadius: BorderRadius.circular(30.0),
                 ),
                 child: TextField(

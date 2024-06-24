@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       )),
       title: "Canteen App",
       debugShowCheckedModeBanner: false,
-      home: const Registerpage(),
+      home: Registerpage(),
     );
   }
 }
