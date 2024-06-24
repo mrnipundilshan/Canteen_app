@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:canteen/config/config.dart';
 import 'package:flutter/material.dart';
 import 'package:canteen/backgrounds/signup_bg.dart';
 import 'package:http/http.dart' as http;
@@ -10,29 +12,48 @@ class Registerpage extends StatefulWidget {
 }
 
 class _RegisterpageState extends State<Registerpage> {
+  TextEditingController mobiletextcontroller = TextEditingController();
+  TextEditingController nametextcontroller = TextEditingController();
+  TextEditingController passwordtextcontroller = TextEditingController();
+  TextEditingController addresstextcontroller = TextEditingController();
+
   String? selectedOption;
   List<String> options = ["FAS", "BS", "TECH"];
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController mobiletextcontroller = TextEditingController();
-    TextEditingController nametextcontroller = TextEditingController();
-    TextEditingController passwordtextcontroller = TextEditingController();
-    TextEditingController addresstextcontroller = TextEditingController();
-
     void registeruser() async {
       if (mobiletextcontroller.text.isNotEmpty &&
           nametextcontroller.text.isNotEmpty &&
           passwordtextcontroller.text.isNotEmpty &&
-          addresstextcontroller.text.isNotEmpty &&
-          selectedOption!.isNotEmpty) {
+          addresstextcontroller.text.isNotEmpty) {
         var regbody = {
           "mobile_number": mobiletextcontroller.text,
           "name": nametextcontroller.text,
           "faculty": selectedOption,
           "address": addresstextcontroller.text,
-          "password": passwordtextcontroller.text
+          "password": passwordtextcontroller.text,
         };
+
+        print("Register Body: $regbody");
+
+        try {
+          var response = await http.post(Uri.parse(register),
+              headers: {"content-Type": "application/json"},
+              body: jsonEncode(regbody));
+
+          if (response.statusCode == 200) {
+            var jsonResponce = jsonDecode(response.body);
+            print("Response status: ${jsonResponce['status']}");
+          } else {
+            print("Server returned an error: ${response.statusCode}");
+            print("Response body: ${response.body}");
+          }
+        } catch (e) {
+          print("Requested failed: $e");
+        }
+      } else {
+        print("Fill all field");
       }
     }
 
@@ -50,14 +71,9 @@ class _RegisterpageState extends State<Registerpage> {
               SizedBox(
                 height: size.height * 0.1,
               ),
-              Positioned(
-                top: size.width * 0.5,
-                right: 5,
-                left: 5000,
-                child: Image.asset(
-                  "assets/profile.png",
-                  width: size.width * 0.4,
-                ),
+              Image.asset(
+                "assets/profile.png",
+                width: size.width * 0.4,
               ),
               SizedBox(
                 height: size.height * 0.01,
@@ -212,8 +228,6 @@ class _RegisterpageState extends State<Registerpage> {
                 ),
                 child: TextField(
                   controller: addresstextcontroller,
-                  maxLines: 2,
-                  minLines: 2,
                   style: TextStyle(
                       fontWeight: FontWeight.w800,
                       color: const Color.fromRGBO(60, 121, 98, 1.0),
@@ -233,7 +247,9 @@ class _RegisterpageState extends State<Registerpage> {
                 height: size.height * 0.02,
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  registeruser();
+                },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromRGBO(60, 121, 98, 1.0),
                     padding: EdgeInsets.symmetric(

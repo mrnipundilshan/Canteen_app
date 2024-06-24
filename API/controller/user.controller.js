@@ -3,8 +3,9 @@ const UserService = require("../services/user.services");
 
 exports.register = async(req,res,next)=>{
     try{
+        
         const {mobile_number,name,faculty,address,password} = req.body;
-
+        
         if (!mobile_number || !name || !faculty || !address || !password) {
             return res.status(400).send({ error: 'All fields are required' });
         }
