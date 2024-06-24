@@ -9,16 +9,15 @@ class Registerpage extends StatefulWidget {
 }
 
 class _RegisterpageState extends State<Registerpage> {
+  String? selectedOption;
+  List<String> options = ["FAS", "BS", "TECH"];
+
   @override
   Widget build(BuildContext context) {
     TextEditingController mobiletextcontroller = TextEditingController();
     TextEditingController nametextcontroller = TextEditingController();
-    TextEditingController facultytextcontroller = TextEditingController();
     TextEditingController passwordtextcontroller = TextEditingController();
     TextEditingController Addresstextcontroller = TextEditingController();
-
-    String? selectedOption;
-    List<String> options = ["FAS", "BS", "TECH"];
 
     Size size = MediaQuery.of(context).size;
 
@@ -90,6 +89,7 @@ class _RegisterpageState extends State<Registerpage> {
                   borderRadius: BorderRadius.circular(30.0),
                 ),
                 child: TextField(
+                  controller: nametextcontroller,
                   style: TextStyle(
                       fontWeight: FontWeight.w800,
                       color: const Color.fromRGBO(60, 121, 98, 1.0),
@@ -114,7 +114,7 @@ class _RegisterpageState extends State<Registerpage> {
                 width: size.width * 0.8,
                 height: size.height * 0.055,
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(119, 187, 162, 1.0),
+                  color: const Color.fromRGBO(119, 187, 162, 1.0),
                   borderRadius: BorderRadius.circular(30.0),
                 ),
                 child: DropdownButtonHideUnderline(
@@ -122,7 +122,7 @@ class _RegisterpageState extends State<Registerpage> {
                     value: selectedOption,
                     hint: Padding(
                       padding: EdgeInsets.only(left: size.width * 0.23),
-                      child: Text(
+                      child: const Text(
                         "Select Faculty",
                         style: TextStyle(
                           color: Color.fromRGBO(60, 121, 98, 1.0),
@@ -131,16 +131,16 @@ class _RegisterpageState extends State<Registerpage> {
                       ),
                     ),
                     isExpanded: true,
-                    icon: Icon(Icons.arrow_drop_down,
+                    icon: const Icon(Icons.arrow_drop_down,
                         color: Color.fromRGBO(60, 121, 98, 1.0)),
-                    dropdownColor: Color.fromRGBO(119, 187, 162, 1.0),
+                    dropdownColor: const Color.fromRGBO(119, 187, 162, 1.0),
                     items: options.map((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Center(
                           child: Text(
                             value,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Color.fromRGBO(60, 121, 98, 1.0),
                               fontWeight: FontWeight.bold,
                             ),
@@ -167,6 +167,7 @@ class _RegisterpageState extends State<Registerpage> {
                   borderRadius: BorderRadius.circular(30.0),
                 ),
                 child: TextField(
+                  controller: passwordtextcontroller,
                   style: TextStyle(
                       fontWeight: FontWeight.w800,
                       color: const Color.fromRGBO(60, 121, 98, 1.0),
@@ -193,6 +194,7 @@ class _RegisterpageState extends State<Registerpage> {
                   borderRadius: BorderRadius.circular(30.0),
                 ),
                 child: TextField(
+                  controller: Addresstextcontroller,
                   maxLines: 2,
                   minLines: 2,
                   style: TextStyle(
