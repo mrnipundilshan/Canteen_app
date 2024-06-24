@@ -10,10 +10,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      theme: ThemeData(
+          textSelectionTheme: const TextSelectionThemeData(
+        selectionHandleColor: Color.fromRGBO(60, 121, 98, 1.0),
+      )),
       title: "Canteen App",
       debugShowCheckedModeBanner: false,
-      home: Registerpage(),
+      home: const Registerpage(),
     );
   }
 }
