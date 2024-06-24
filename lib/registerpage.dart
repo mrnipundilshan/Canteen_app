@@ -18,7 +18,7 @@ class _RegisterpageState extends State<Registerpage> {
     TextEditingController Addresstextcontroller = TextEditingController();
 
     String? selectedOption;
-    List<String> options = ["Option 1", "Option 2", "Option 3"];
+    List<String> options = ["FAS", "BS", "TECH"];
 
     Size size = MediaQuery.of(context).size;
 
@@ -120,11 +120,14 @@ class _RegisterpageState extends State<Registerpage> {
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton<String>(
                     value: selectedOption,
-                    hint: Text(
-                      "Select Faculty",
-                      style: TextStyle(
-                        color: Color.fromRGBO(60, 121, 98, 1.0),
-                        fontWeight: FontWeight.bold,
+                    hint: Padding(
+                      padding: EdgeInsets.only(left: size.width * 0.23),
+                      child: Text(
+                        "Select Faculty",
+                        style: TextStyle(
+                          color: Color.fromRGBO(60, 121, 98, 1.0),
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                     isExpanded: true,
@@ -134,11 +137,13 @@ class _RegisterpageState extends State<Registerpage> {
                     items: options.map((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
-                        child: Text(
-                          value,
-                          style: TextStyle(
-                            color: Color.fromRGBO(60, 121, 98, 1.0),
-                            fontWeight: FontWeight.bold,
+                        child: Center(
+                          child: Text(
+                            value,
+                            style: TextStyle(
+                              color: Color.fromRGBO(60, 121, 98, 1.0),
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       );
