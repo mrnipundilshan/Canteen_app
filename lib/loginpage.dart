@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:canteen/backgrounds/signup_bg.dart';
+import 'package:canteen/config/config.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class login extends StatefulWidget {
   const login({super.key});
@@ -14,7 +18,34 @@ class _loginState extends State<login> {
 
   @override
   Widget build(BuildContext context) {
+    void login() async{
+      if (mobiletextcontroller.text.isNotEmpty &&
+          passwordtextcontroller.text.isNotEmpty) {
+
+        var reqbody = {
+          "mobile_number": mobiletextcontroller.text,
+          "passsword": passwordtextcontroller.text
+        };
+
+        try {
+          var response = await http.post(Uri.parse(loign),
+          headers: {"context-Type": "application/json"},
+          body: jsonEncode(reqbody));
+
+          var jsonResponce = jsonDecode(response.body);
+
+          if(jsonResponce =['status']){
+
+          } else{
+           print("Somthing went wrong");}
+        } catch{
+
+        }
+      }
+    }
+
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
         resizeToAvoidBottomInset: true,
         body: Background(

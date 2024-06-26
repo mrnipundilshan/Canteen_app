@@ -36,8 +36,6 @@ class _RegisterpageState extends State<Registerpage> {
           "password": passwordtextcontroller.text,
         };
 
-        print("Register Body: $regbody");
-
         try {
           var response = await http.post(Uri.parse(register),
               headers: {"content-Type": "application/json"},
