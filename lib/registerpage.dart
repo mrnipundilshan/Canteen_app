@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:canteen/config/config.dart';
 import 'package:flutter/material.dart';
 import 'package:canteen/backgrounds/signup_bg.dart';
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 
 class Registerpage extends StatefulWidget {
@@ -254,11 +255,28 @@ class _RegisterpageState extends State<Registerpage> {
                     backgroundColor: const Color.fromRGBO(60, 121, 98, 1.0),
                     padding: EdgeInsets.symmetric(
                         horizontal: size.height * 0.13, vertical: 15)),
-                child: const Text(
+                child: Text(
                   "Register",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: size.width * 0.04,
+                  ),
                 ),
               ),
+              SizedBox(
+                height: size.height * 0.02,
+              ),
+              GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/login');
+                  },
+                  child: Text(
+                    "Already have account? Login",
+                    style: TextStyle(
+                      color: const Color.fromRGBO(60, 121, 98, 1.0),
+                      fontSize: size.width * 0.04,
+                    ),
+                  ))
             ],
           ),
         ),
