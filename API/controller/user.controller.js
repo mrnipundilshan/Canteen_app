@@ -22,3 +22,29 @@ exports.register = async(req,res,next)=>{
         }
     }
 }
+
+exports.login = async(req,res,next)=>{
+    try {
+        const {mobile_number,password} = req.body;
+
+        const user = await UserService.checkuser(mobile_number);
+
+        if(!user){
+            return res.status(400).json({status:false, error: 'User does not exist'});
+        }
+
+        const isMatch = await user.comparePassword(password);
+
+        if(isMatch === false){
+            return res.status(400).json({status: false, error:"Password Invalid"});
+        }
+
+        let tokenData = {_id:user._id, mobile_number:user.mobile_number};
+
+        const token = await UserService.genarateToken(tokenData,"secretKey",'1h');
+
+        res.json({status:true, token:token});
+    } catch(error){
+        next(error);
+    }
+}

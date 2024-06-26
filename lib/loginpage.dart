@@ -95,6 +95,28 @@ class _loginState extends State<login> {
                             ),
                           ),
                         ),
+                        SizedBox(
+                          height: size.height * 0.02,
+                        ),
+                        ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor:
+                                  const Color.fromRGBO(60, 121, 98, 1.0),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: size.height * 0.13,
+                                  vertical: 15)),
+                          child: Text(
+                            "Login",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: size.width * 0.04,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: size.height * 0.02,
+                        ),
                         GestureDetector(
                             onTap: () {
                               Navigator.pushNamed(context, '/login');
@@ -105,7 +127,14 @@ class _loginState extends State<login> {
                                 color: const Color.fromRGBO(60, 121, 98, 1.0),
                                 fontSize: size.width * 0.04,
                               ),
-                            ))
+                            )),
+                        SizedBox(
+                          height: size.height * 0.03,
+                        ),
+                        Image.asset(
+                          "assets/plate.png",
+                          width: size.width * 0.4,
+                        ),
                       ],
                     )))));
   }
