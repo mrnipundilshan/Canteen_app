@@ -82,6 +82,7 @@ class _RegisterpageState extends State<Registerpage> {
               Text(
                 "Register",
                 style: TextStyle(
+                    fontWeight: FontWeight.bold,
                     fontSize: size.width * 0.1,
                     color: const Color.fromRGBO(60, 121, 98, 1.0)),
               ),
