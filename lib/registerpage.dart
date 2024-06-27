@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:canteen/config/config.dart';
 import 'package:flutter/material.dart';
 import 'package:canteen/backgrounds/signup_bg.dart';
-import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 
 class Registerpage extends StatefulWidget {

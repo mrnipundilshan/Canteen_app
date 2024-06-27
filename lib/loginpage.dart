@@ -1,9 +1,10 @@
 import 'dart:convert';
-
 import 'package:canteen/backgrounds/signup_bg.dart';
 import 'package:canteen/config/config.dart';
+import 'package:canteen/pages/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class login extends StatefulWidget {
   const login({super.key});
@@ -16,30 +17,45 @@ class _loginState extends State<login> {
   TextEditingController mobiletextcontroller = TextEditingController();
   TextEditingController passwordtextcontroller = TextEditingController();
 
+  late SharedPreferences prefs;
+
+  @override
+  void initState() {
+    super.initState();
+    initSharedpref();
+  }
+
+  void initSharedpref() async {
+    prefs = await SharedPreferences.getInstance();
+  }
+
   @override
   Widget build(BuildContext context) {
-    void login() async{
+    void login() async {
       if (mobiletextcontroller.text.isNotEmpty &&
           passwordtextcontroller.text.isNotEmpty) {
-
         var reqbody = {
           "mobile_number": mobiletextcontroller.text,
-          "passsword": passwordtextcontroller.text
+          "password": passwordtextcontroller.text
         };
 
-        try {
-          var response = await http.post(Uri.parse(loign),
-          headers: {"context-Type": "application/json"},
-          body: jsonEncode(reqbody));
+        var response = await http.post(Uri.parse(loginn),
+            headers: {"content-Type": "application/json"},
+            body: jsonEncode(reqbody));
 
-          var jsonResponce = jsonDecode(response.body);
+        var jsonResponse = jsonDecode(response.body);
 
-          if(jsonResponce =['status']){
+        if (jsonResponse['status']) {
+          var myToken = jsonResponse['token'];
 
-          } else{
-           print("Somthing went wrong");}
-        } catch{
+          prefs.setString('token', myToken);
 
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => menupage(token: myToken)));
+        } else {
+          print("Somthing went wrong");
         }
       }
     }
@@ -130,7 +146,9 @@ class _loginState extends State<login> {
                           height: size.height * 0.02,
                         ),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            login();
+                          },
                           style: ElevatedButton.styleFrom(
                               backgroundColor:
                                   const Color.fromRGBO(60, 121, 98, 1.0),
@@ -150,7 +168,7 @@ class _loginState extends State<login> {
                         ),
                         GestureDetector(
                             onTap: () {
-                              Navigator.pushNamed(context, '/login');
+                              Navigator.pushNamed(context, '/register');
                             },
                             child: Text(
                               "Doesn't has account? Register Now",

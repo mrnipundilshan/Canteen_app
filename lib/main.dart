@@ -1,5 +1,4 @@
 import 'package:canteen/loginpage.dart';
-import 'package:canteen/pages/menu.dart';
 import 'package:canteen/registerpage.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       routes: {
         '/login': (context) => const login(),
-        '/menu': (context) => const menupage(),
+        '/register': (context) => const Registerpage(),
       },
       theme: ThemeData(
           textSelectionTheme: const TextSelectionThemeData(
