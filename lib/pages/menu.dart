@@ -1,7 +1,45 @@
+import 'dart:convert';
+
 import 'package:canteen/backgrounds/signup_bg.dart';
+import 'package:canteen/config/config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:flutter/widgets.dart';
+
+class menuitem {
+  late final String id;
+  late final String name;
+  late final String price;
+  late final int visible;
+
+  menuitem(
+      {required this.id,
+      required this.name,
+      required this.price,
+      required this.visible});
+
+  factory menuitem.fromJson(Map<String, dynamic> json) {
+    return menuitem(
+      id: json['_id'],
+      name: json['name'],
+      price: json['price'],
+      visible: json['visible'],
+    );
+  }
+}
+
+Future<List<menuitem>> fetchmenuitems() async {
+  final response = await http.get(Uri.parse(menulist));
+
+  if (response.statusCode == 200) {
+    List jsonResponse = json.decode(response.body);
+    return jsonResponse.map((item) => menuitem.fromJson(item)).toList();
+  } else {
+    throw Exception('Failed to load menu items');
+  }
+}
 
 class menupage extends StatefulWidget {
   const menupage({super.key});
@@ -11,6 +49,14 @@ class menupage extends StatefulWidget {
 }
 
 class _menupageState extends State<menupage> {
+  late Future<List<menuitem>> futuremenuitems;
+
+  @override
+  void initstate() {
+    super.initState();
+    futuremenuitems = fetchmenuitems();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
