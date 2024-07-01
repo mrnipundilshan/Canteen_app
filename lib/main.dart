@@ -1,4 +1,5 @@
 import 'package:canteen/loginpage.dart';
+import 'package:canteen/pages/menu.dart';
 import 'package:canteen/registerpage.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
       )),
       title: "Canteen App",
       debugShowCheckedModeBanner: false,
-      home: const Registerpage(),
+      home: const menupage(),
     );
   }
 }
