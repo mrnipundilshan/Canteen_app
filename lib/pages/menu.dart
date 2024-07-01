@@ -14,36 +14,58 @@ class _menupageState extends State<menupage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Background(
-      child: SingleChildScrollView(
-        child: Container(
-          width: double.infinity,
-          height: size.height,
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: size.height * 0.05,
-              ),
-              Row(
-                children: <Widget>[
-                  SizedBox(
-                    width: size.height * 0.01,
-                  ),
-                  Image.asset(
-                    "assets/profile.png",
-                    width: size.width * 0.15,
-                  ),
-                  SizedBox(
-                    width: size.height * 0.03,
-                  ),
-                  Image.asset(
-                    "assets/profile.png",
-                    width: size.width * 0.15,
-                  ),
-                ],
-              ),
-              Column()
-            ],
+
+    return Scaffold(
+      body: Background(
+        child: SingleChildScrollView(
+          child: Container(
+            width: double.infinity,
+            height: size.height,
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: size.height * 0.05,
+                ),
+                Row(
+                  children: <Widget>[
+                    SizedBox(
+                      width: size.height * 0.01,
+                    ),
+                    Image.asset(
+                      "assets/profile.png",
+                      width: size.width * 0.15,
+                    ),
+                    SizedBox(
+                      width: size.height * 0.03,
+                    ),
+                    Image.asset(
+                      "assets/profile.png",
+                      width: size.width * 0.15,
+                    ),
+                  ],
+                ),
+                Column(
+                  children: <Widget>[
+                    Text(
+                      "2024.06.24 Menu",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: size.width * 0.08,
+                          color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                    ),
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(vertical: size.height * 0.05),
+                      width: size.width * 0.9,
+                      decoration: BoxDecoration(
+                        color: const Color.fromRGBO(119, 187, 162, 1.0),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
