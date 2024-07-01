@@ -25,11 +25,27 @@ class _menupageState extends State<menupage> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Background(
       child: SingleChildScrollView(
         child: Container(
+          width: double.infinity,
+          height: size.height,
           child: Column(
-            children: [Text(mobile_number)],
+            children: <Widget>[
+              Text(mobile_number),
+              Text("sfdsd"),
+              Text(
+                "Login",
+                style: TextStyle(
+                    fontSize: size.width * 0.1,
+                    fontWeight: FontWeight.bold,
+                    color: const Color.fromRGBO(60, 121, 98, 1.0)),
+              ),
+              SizedBox(
+                height: size.height * 0.02,
+              ),
+            ],
           ),
         ),
       ),

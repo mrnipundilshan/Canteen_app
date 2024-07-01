@@ -1,5 +1,6 @@
 const UserModel = require("../model/user.model");
 const UserService = require("../services/user.services");
+const db = require('../config/db');
 
 exports.register = async(req,res,next)=>{
     try{
@@ -48,3 +49,13 @@ exports.login = async(req,res,next)=>{
         next(error);
     }
 }
+
+exports.getmenu = async (req,res)=>{
+    try{
+        const collection = db.collection('menu');
+        const menu = await collection.find({}).toArray();
+        res.status(200).json(menu);
+    } catch(error){
+        res.status(500).json({message: 'Error fetching menu details', error: error});
+    }
+};
