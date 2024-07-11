@@ -14,7 +14,7 @@ class _food_cardState extends State<food_card> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      child: Text("N"),
+      child: Text(widget.food_name),
       padding: EdgeInsets.symmetric(vertical: size.height * 0.05),
       width: size.width * 0.9,
       decoration: BoxDecoration(
