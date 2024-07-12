@@ -16,8 +16,8 @@ class _food_cardState extends State<food_card> {
     return Container(
       padding: EdgeInsets.only(
           left: size.width * 0.03,
-          top: size.width * 0.03,
-          bottom: size.width * 0.03,
+          top: size.width * 0.02,
+          bottom: size.width * 0.02,
           right: size.width * 0.03),
       margin: EdgeInsets.only(
           left: size.width * 0.03,
@@ -33,7 +33,7 @@ class _food_cardState extends State<food_card> {
         children: [
           Image.asset(
             getImageAsset(widget.food_name),
-            width: size.width * 0.2,
+            width: size.width * 0.17,
           ),
           SizedBox(width: size.width * 0.2),
           Column(children: [

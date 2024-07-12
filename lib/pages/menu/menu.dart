@@ -62,14 +62,14 @@ class _menupageState extends State<menupage> {
                   ),
                   Image.asset(
                     "assets/profile.png",
-                    width: size.width * 0.15,
+                    width: size.width * 0.12,
                   ),
                   SizedBox(
                     width: size.height * 0.03,
                   ),
                   Image.asset(
                     "assets/profile.png",
-                    width: size.width * 0.15,
+                    width: size.width * 0.12,
                   ),
                 ],
               ),
@@ -80,7 +80,7 @@ class _menupageState extends State<menupage> {
                 "2024.06.24 Menu",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: size.width * 0.08,
+                    fontSize: size.width * 0.06,
                     color: const Color.fromRGBO(60, 121, 98, 1.0)),
               ),
               Expanded(
@@ -98,6 +98,57 @@ class _menupageState extends State<menupage> {
                           return const Text("No Menu data");
                         }
                       })),
+              Stack(
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      SizedBox(width: size.width * 0.04),
+                      Container(
+                        padding: EdgeInsets.only(
+                            left: size.width * 0.03,
+                            top: size.width * 0.02,
+                            bottom: size.width * 0.02,
+                            right: size.width * 0.03),
+                        width: size.width * 0.25,
+                        height: size.height * 0.06,
+                        decoration: BoxDecoration(
+                          color: const Color.fromRGBO(119, 187, 162, 1.0),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(
+                            left: size.width * 0.03,
+                            top: size.width * 0.02,
+                            bottom: size.width * 0.02,
+                            right: size.width * 0.03),
+                        width: size.width * 0.35,
+                        height: size.height * 0.06,
+                        decoration: BoxDecoration(
+                          color: const Color.fromRGBO(119, 187, 162, 1.0),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(
+                            left: size.width * 0.03,
+                            top: size.width * 0.02,
+                            bottom: size.width * 0.02,
+                            right: size.width * 0.03),
+                        width: size.width * 0.25,
+                        height: size.height * 0.06,
+                        decoration: BoxDecoration(
+                          color: const Color.fromRGBO(119, 187, 162, 1.0),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                      SizedBox(width: size.width * 0.04),
+                    ],
+                  ),
+                  SizedBox(height: size.height * 0.15),
+                ],
+              )
             ],
           ),
         ),
@@ -109,6 +160,7 @@ class _menupageState extends State<menupage> {
 Widget buildmenus(List<Menu> menus) {
   return ListView.builder(
     padding: EdgeInsets.zero,
+    shrinkWrap: true,
     itemCount: menus.length,
     itemBuilder: (context, index) {
       final Menu = menus[index];
