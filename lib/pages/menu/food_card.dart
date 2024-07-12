@@ -10,6 +10,7 @@ class food_card extends StatefulWidget {
 }
 
 class _food_cardState extends State<food_card> {
+  int count = 0;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -30,12 +31,12 @@ class _food_cardState extends State<food_card> {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
+        children: <Widget>[
           Image.asset(
             getImageAsset(widget.food_name),
             width: size.width * 0.17,
           ),
-          SizedBox(width: size.width * 0.2),
+          SizedBox(width: size.width * 0.14),
           Column(children: [
             Text(
               widget.food_name,
@@ -52,8 +53,26 @@ class _food_cardState extends State<food_card> {
                   color: const Color.fromRGBO(60, 121, 98, 1.0)),
             )
           ]),
-          SizedBox(width: size.width * 0.2),
-          Row(children: [Text("+"), Text("00"), Text("-")]),
+          SizedBox(width: size.width * 0.05),
+          Row(children: <Widget>[
+            IconButton(
+                onPressed: () {
+                  setState(() {
+                    count = count + 1;
+                  });
+                },
+                icon: Icon(Icons.add_box_rounded)),
+            Text(count.toString()),
+            IconButton(
+                onPressed: () {
+                  setState(() {
+                    if (count > 0) {
+                      count = count - 1;
+                    }
+                  });
+                },
+                icon: Icon(Icons.remove_circle)),
+          ]),
         ],
       ),
     );
