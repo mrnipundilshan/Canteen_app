@@ -1,8 +1,11 @@
 class Menu {
   final String name;
-  final int price;
+  final String price;
 
-  Menu({required this.name, required this.price});
+  const Menu({
+    required this.name,
+    required this.price,
+  });
 
   static Menu fromJson(json) => Menu(
         name: json['name'],

@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:canteen/backgrounds/signup_bg.dart';
 import 'package:canteen/pages/menu/food_card.dart';
 import 'package:canteen/pages/menu/food_class.dart';
@@ -22,87 +20,59 @@ class menupage extends StatefulWidget {
 class _menupageState extends State<menupage> {
   List<Menu> menus = getmenu();
 
-  static List<Menu> getmenu(){
-    const data = {
-
-    }
-
+  static List<Menu> getmenu() {
+    const data = [
+      {
+        "name": "veg",
+        "price": "100",
+      },
+      {
+        "name": "Mas",
+        "price": "100",
+      }
+    ];
     return data.map<Menu>(Menu.fromJson).toList();
   }
-  
+
   late String mobile_number;
 
   // @override
   // void initState() {
-  //   // TODO: implement initState
+  // TODO: implement initState
   //   super.initState();
   //   Map<String, dynamic> jwtDecodedToken = JwtDecoder.decode(widget.token);
 
   //   mobile_number = jwtDecodedToken['mobile_number'];
-  // }
+  //getmenu();
+  //}
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    print("Item count: ${menus.length}");
+    for (var menu in menus) {
+      print("Menu item: ${menu.name}, Price: ${menu.price}");
+    }
     return Scaffold(
       body: Background(
         child: SingleChildScrollView(
           child: Container(
-            width: double.infinity,
-            height: size.height,
-            child: Column(
-              children: <Widget>[
-                SizedBox(
-                  height: size.height * 0.05,
-                ),
-                Row(
-                  children: <Widget>[
-                    SizedBox(
-                      width: size.height * 0.01,
-                    ),
-                    Image.asset(
-                      "assets/profile.png",
-                      width: size.width * 0.15,
-                    ),
-                    SizedBox(
-                      width: size.height * 0.03,
-                    ),
-                    Image.asset(
-                      "assets/profile.png",
-                      width: size.width * 0.15,
-                    ),
-                  ],
-                ),
-                Column(
-                  children: <Widget>[
-                    Text(
-                      "2024.06.24 Menu",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: size.width * 0.08,
-                          color: const Color.fromRGBO(60, 121, 98, 1.0)),
-                    ),
-                    buildmenus(menus),
-                  ],
-                )
-              ],
-            ),
-          ),
+              width: double.infinity,
+              height: size.height,
+              child: buildmenus(menus)),
         ),
       ),
     );
   }
-  Widget buildmenus(List<Menu> menus) => ListView.builder(
-  itemCount: menus.length,
-  itemBuilder: (context, index){
-    final Menu = menus[index];
-
-    food_card(food_name: Menu.name, price: Menu.price);
-  },
-  
-);
-
 }
 
+Widget buildmenus(List<Menu> menus) {
+  return ListView.builder(
+    itemCount: menus.length,
+    itemBuilder: (context, index) {
+      final Menu = menus[index];
 
-
+      return food_card(food_name: Menu.name, price: Menu.price);
+    },
+  );
+}

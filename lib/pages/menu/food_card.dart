@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class food_card extends StatefulWidget {
   final String food_name;
-  final int price;
+  final String price;
   const food_card({super.key, required this.food_name, required this.price});
 
   @override
@@ -16,6 +16,7 @@ class _food_cardState extends State<food_card> {
     return Container(
       child: Text(widget.food_name),
       padding: EdgeInsets.symmetric(vertical: size.height * 0.05),
+      margin: EdgeInsets.only(left: 18, bottom: 18, right: 18),
       width: size.width * 0.9,
       decoration: BoxDecoration(
         color: const Color.fromRGBO(119, 187, 162, 1.0),
