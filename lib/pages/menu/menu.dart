@@ -1,5 +1,5 @@
 import 'package:canteen/backgrounds/signup_bg.dart';
-import 'package:canteen/pages/food_card.dart';
+import 'package:canteen/pages/menu/food_card.dart';
 import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:http/http.dart' as http;
@@ -66,7 +66,9 @@ class _menupageState extends State<menupage> {
                           fontSize: size.width * 0.08,
                           color: const Color.fromRGBO(60, 121, 98, 1.0)),
                     ),
-                    food_card(food_name: "veg", price: 34)
+                    food_card(food_name: "veg", price: 34),
+                    SizedBox(height: size.height * 0.01),
+                    food_card(food_name: "Mas", price: 34),
                   ],
                 )
               ],

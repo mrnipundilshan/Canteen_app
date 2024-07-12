@@ -1,5 +1,5 @@
 import 'package:canteen/loginpage.dart';
-import 'package:canteen/pages/menu.dart';
+import 'package:canteen/pages/menu/menu.dart';
 import 'package:canteen/registerpage.dart';
 import 'package:flutter/material.dart';
 
