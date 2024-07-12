@@ -1,29 +1,45 @@
+import 'dart:js';
+
 import 'package:canteen/backgrounds/signup_bg.dart';
 import 'package:canteen/pages/menu/food_card.dart';
+import 'package:canteen/pages/menu/food_class.dart';
 import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:http/http.dart' as http;
 import 'package:canteen/config/config.dart';
 
 class menupage extends StatefulWidget {
-  final token;
-  const menupage({@required this.token, Key? key}) : super(key: key);
+  // final token;
+  // const menupage({@required this.token, Key? key}) : super(key: key);
+
+  final String user;
+  const menupage({required this.user, Key? key}) : super(key: key);
 
   @override
   State<menupage> createState() => _menupageState();
 }
 
 class _menupageState extends State<menupage> {
+  List<Menu> menus = getmenu();
+
+  static List<Menu> getmenu(){
+    const data = {
+
+    }
+
+    return data.map<Menu>(Menu.fromJson).toList();
+  }
+  
   late String mobile_number;
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    Map<String, dynamic> jwtDecodedToken = JwtDecoder.decode(widget.token);
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   Map<String, dynamic> jwtDecodedToken = JwtDecoder.decode(widget.token);
 
-    mobile_number = jwtDecodedToken['mobile_number'];
-  }
+  //   mobile_number = jwtDecodedToken['mobile_number'];
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -66,9 +82,7 @@ class _menupageState extends State<menupage> {
                           fontSize: size.width * 0.08,
                           color: const Color.fromRGBO(60, 121, 98, 1.0)),
                     ),
-                    food_card(food_name: "veg", price: 34),
-                    SizedBox(height: size.height * 0.01),
-                    food_card(food_name: "Mas", price: 34),
+                    buildmenus(menus),
                   ],
                 )
               ],
@@ -78,4 +92,17 @@ class _menupageState extends State<menupage> {
       ),
     );
   }
+  Widget buildmenus(List<Menu> menus) => ListView.builder(
+  itemCount: menus.length,
+  itemBuilder: (context, index){
+    final Menu = menus[index];
+
+    food_card(food_name: Menu.name, price: Menu.price);
+  },
+  
+);
+
 }
+
+
+
