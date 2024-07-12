@@ -14,13 +14,41 @@ class _food_cardState extends State<food_card> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      child: Text(widget.food_name),
-      padding: EdgeInsets.symmetric(vertical: size.height * 0.05),
-      margin: EdgeInsets.only(left: 18, bottom: 18, right: 18),
+      padding: EdgeInsets.only(
+          left: size.width * 0.03,
+          top: size.width * 0.03,
+          bottom: size.width * 0.03,
+          right: size.width * 0.03),
+      margin: EdgeInsets.only(
+          left: size.width * 0.03,
+          bottom: size.width * 0.03,
+          right: size.width * 0.03),
       width: size.width * 0.9,
       decoration: BoxDecoration(
         color: const Color.fromRGBO(119, 187, 162, 1.0),
         borderRadius: BorderRadius.circular(10.0),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Image.asset(
+            "assets/menu/veg.png",
+            width: size.width * 0.2,
+          ),
+          SizedBox(
+            width: size.width * 0.2,
+          ),
+          Column(
+            children: [Text(widget.food_name), Text(widget.price)],
+          ),
+          SizedBox(
+            width: size.width * 0.2,
+          ),
+          Column(
+            children: [Text(widget.food_name), Text(widget.price)],
+          ),
+        ],
       ),
     );
   }
