@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:canteen/backgrounds/signup_bg.dart';
 import 'package:canteen/pages/menu/food_card.dart';
 import 'package:canteen/pages/menu/food_class.dart';
 import 'package:flutter/material.dart';
+import 'package:http/retry.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:http/http.dart' as http;
 import 'package:canteen/config/config.dart';
@@ -18,20 +21,12 @@ class menupage extends StatefulWidget {
 }
 
 class _menupageState extends State<menupage> {
-  List<Menu> menus = getmenu();
+  Future<List<Menu>> menus = getmenu();
 
-  static List<Menu> getmenu() {
-    const data = [
-      {
-        "name": "veg",
-        "price": "100",
-      },
-      {
-        "name": "Mas",
-        "price": "100",
-      }
-    ];
-    return data.map<Menu>(Menu.fromJson).toList();
+  static Future<List<Menu>> getmenu() async {
+    final response = await http.get(Uri.parse(menulist));
+    final body = json.decode(response.body);
+    return body.map<Menu>(Menu.fromJson).toList();
   }
 
   late String mobile_number;
@@ -49,17 +44,64 @@ class _menupageState extends State<menupage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    print("Item count: ${menus.length}");
-    for (var menu in menus) {
-      print("Menu item: ${menu.name}, Price: ${menu.price}");
-    }
+
     return Scaffold(
       body: Background(
         child: SingleChildScrollView(
           child: Container(
-              width: double.infinity,
-              height: size.height,
-              child: buildmenus(menus)),
+            width: double.infinity,
+            height: size.height,
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: size.height * 0.05,
+                ),
+                Row(
+                  children: <Widget>[
+                    SizedBox(
+                      width: size.height * 0.01,
+                    ),
+                    Image.asset(
+                      "assets/profile.png",
+                      width: size.width * 0.15,
+                    ),
+                    SizedBox(
+                      width: size.height * 0.03,
+                    ),
+                    Image.asset(
+                      "assets/profile.png",
+                      width: size.width * 0.15,
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "2024.06.24 Menu",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: size.width * 0.08,
+                        color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                  ),
+                ),
+                Expanded(
+                    child: FutureBuilder<List<Menu>>(
+                        future: menus,
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const CircularProgressIndicator.adaptive();
+                          } else if (snapshot.hasData) {
+                            final menus = snapshot.data!;
+
+                            return buildmenus(menus);
+                          } else {
+                            return const Text("No Menu data");
+                          }
+                        })),
+              ],
+            ),
+          ),
         ),
       ),
     );
