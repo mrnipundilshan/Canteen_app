@@ -4,7 +4,6 @@ import 'package:canteen/backgrounds/signup_bg.dart';
 import 'package:canteen/pages/menu/food_card.dart';
 import 'package:canteen/pages/menu/food_class.dart';
 import 'package:flutter/material.dart';
-import 'package:http/retry.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:http/http.dart' as http;
 import 'package:canteen/config/config.dart';

@@ -1,6 +1,6 @@
 class Menu {
   final String name;
-  final String price;
+  final int price;
 
   const Menu({
     required this.name,
