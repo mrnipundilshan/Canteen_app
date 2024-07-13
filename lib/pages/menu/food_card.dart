@@ -83,6 +83,10 @@ class _food_cardState extends State<food_card> {
                   setState(() {
                     count = count + 1;
                     totalprovider.inctotal(widget.price);
+
+                    print(count);
+                    print(widget.food_name);
+                    print(widget.price);
                   });
                 },
                 icon: Icon(Icons.add_box_rounded)),

@@ -13,13 +13,11 @@ class Totalprovider with ChangeNotifier {
 
   inctotal(int price) {
     total = total + price;
-    print(total);
     notifyListeners();
   }
 
   dectotal(int price) {
     total = total - price;
-    print(total);
     notifyListeners();
   }
 }
