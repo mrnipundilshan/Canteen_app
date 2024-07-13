@@ -1,3 +1,4 @@
+import 'package:canteen/pages/menu/food_item.dart';
 import 'package:canteen/pages/menu/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -66,6 +67,8 @@ class _food_cardState extends State<food_card> {
                     if (count > 0) {
                       count = count - 1;
                       totalprovider.dectotal(widget.price);
+                      food_item.valueupdate(
+                          widget.food_name, count, widget.price);
                     }
                   });
                 },
@@ -83,10 +86,8 @@ class _food_cardState extends State<food_card> {
                   setState(() {
                     count = count + 1;
                     totalprovider.inctotal(widget.price);
-
-                    print(count);
-                    print(widget.food_name);
-                    print(widget.price);
+                    food_item.valueupdate(
+                        widget.food_name, count, widget.price);
                   });
                 },
                 icon: Icon(Icons.add_box_rounded)),

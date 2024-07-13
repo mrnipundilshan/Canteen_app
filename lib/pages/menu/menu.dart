@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:canteen/backgrounds/signup_bg.dart';
 import 'package:canteen/pages/menu/food_card.dart';
 import 'package:canteen/pages/menu/food_class.dart';
+import 'package:canteen/pages/menu/food_item.dart';
 import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:http/http.dart' as http;
@@ -184,9 +185,7 @@ class _menupageState extends State<menupage> {
                           ),
                           child: IconButton(
                               color: const Color.fromARGB(255, 11, 105, 69),
-                              onPressed: () {
-                                print("object");
-                              },
+                              onPressed: () {},
                               icon: const Icon(Icons.double_arrow)),
                         ),
                         SizedBox(width: size.width * 0.04),

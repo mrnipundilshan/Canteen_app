@@ -1,3 +1,5 @@
+final FoodItem food_item = FoodItem();
+
 class FoodItem {
   int veg_count = 0;
   int veg_price = 0;
@@ -19,28 +21,28 @@ class FoodItem {
 
   late String food_name;
 
-  valueupdate(String food_name, count, price) {
-    if (food_name == "veg") {
+  valueupdate(food_name, count, price) {
+    if (food_name == "Veg") {
       veg_count = count;
       veg_price = price;
     }
-    if (food_name == "egg") {
+    if (food_name == "Egg") {
       egg_count = count;
       egg_price = price;
     }
-    if (food_name == "chicken") {
+    if (food_name == "Chicken") {
       chicken_count = count;
       chicken_price = price;
     }
-    if (food_name == "rice") {
+    if (food_name == "Rice") {
       rice_count = count;
       rice_price = price;
     }
-    if (food_name == "kottu") {
+    if (food_name == "Kottu") {
       kottu_count = count;
       kottu_price = price;
     }
-    if (food_name == "fish") {
+    if (food_name == "Fish") {
       fish_count = count;
       fish_price = price;
     }
