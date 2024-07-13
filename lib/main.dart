@@ -23,9 +23,7 @@ class MyApp extends StatelessWidget {
       )),
       title: "Canteen App",
       debugShowCheckedModeBanner: false,
-      home: const menupage(
-        user: "0768521399",
-      ),
+      home: const login(),
     );
   }
 }

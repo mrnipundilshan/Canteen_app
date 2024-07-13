@@ -16,14 +16,20 @@ class Totalprovider with ChangeNotifier {
     print(total);
     notifyListeners();
   }
+
+  dectotal(int price) {
+    total = total - price;
+    print(total);
+    notifyListeners();
+  }
 }
 
 class menupage extends StatefulWidget {
-  // final token;
-  // const menupage({@required this.token, Key? key}) : super(key: key);
-
-  final String user;
-  const menupage({required this.user, Key? key}) : super(key: key);
+  final token;
+  const menupage({
+    @required this.token,
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<menupage> createState() => _menupageState();
@@ -40,15 +46,15 @@ class _menupageState extends State<menupage> {
 
   late String mobile_number;
 
-  // @override
-  // void initState() {
-  // TODO: implement initState
-  //   super.initState();
-  //   Map<String, dynamic> jwtDecodedToken = JwtDecoder.decode(widget.token);
+  @override
+  void initState() {
+    //TODO: implement initState
+    super.initState();
+    Map<String, dynamic> jwtDecodedToken = JwtDecoder.decode(widget.token);
 
-  //   mobile_number = jwtDecodedToken['mobile_number'];
-  //getmenu();
-  //}
+    mobile_number = jwtDecodedToken['mobile_number'];
+    getmenu();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +73,7 @@ class _menupageState extends State<menupage> {
                   height: size.height * 0.05,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     SizedBox(
                       width: size.height * 0.01,
@@ -75,12 +82,19 @@ class _menupageState extends State<menupage> {
                       "assets/profile.png",
                       width: size.width * 0.12,
                     ),
-                    SizedBox(
-                      width: size.height * 0.03,
+                    Text(
+                      'Hi ' + mobile_number,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: size.width * 0.05,
+                          color: const Color.fromRGBO(60, 121, 98, 1.0)),
                     ),
                     Image.asset(
                       "assets/profile.png",
                       width: size.width * 0.12,
+                    ),
+                    SizedBox(
+                      width: size.height * 0.01,
                     ),
                   ],
                 ),

@@ -65,6 +65,7 @@ class _food_cardState extends State<food_card> {
                   setState(() {
                     if (count > 0) {
                       count = count - 1;
+                      totalprovider.dectotal(widget.price);
                     }
                   });
                 },

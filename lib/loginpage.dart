@@ -50,10 +50,10 @@ class _loginState extends State<login> {
 
           prefs.setString('token', myToken);
 
-          // Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //         builder: (context) => menupage(token: myToken)));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => menupage(token: myToken)));
         } else {
           print("Somthing went wrong");
         }
