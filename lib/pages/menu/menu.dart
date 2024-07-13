@@ -143,7 +143,7 @@ class _menupageState extends State<menupage> {
                             ),
                             alignment: Alignment.center,
                             child: Text(
-                              totalprovider.total.toString(),
+                              'Rs. ' + totalprovider.total.toString(),
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: size.width * 0.05,
