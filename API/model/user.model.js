@@ -33,6 +33,81 @@ const userSchema = new Schema({
 
 });
 
+const orderSchema = new Schema({
+    mobile_number:{
+        type:String,
+        required : true,
+        unique : true,
+    },
+    total:{
+        type:int,
+        required: false,
+    },
+
+    veg_count:{
+        type:int,
+        required: false,
+    },
+
+    veg_price:{
+        type:int,
+        required: false,
+    },
+
+    egg_count:{
+        type:int,
+        required: false,
+    },
+    egg_price:{
+        type:int,
+        required: false,
+    },
+
+    chicken_count:{
+        type:int,
+        required: false,
+    },
+
+    chicken_price:{
+        type:int,
+        required: false,
+    },
+
+    rice_count:{
+        type:int,
+        required: false,
+    },
+
+    rice_price:{
+        type:int,
+        required: false,
+    },
+
+    kottu_count:{
+        type:int,
+        required: false,
+    },
+
+    kottu_price:{
+        type:int,
+        required: false,
+    },
+
+    fish_count:{
+        type:int,
+        required: false,
+    },
+
+    fish_price:{
+        type:int,
+        required: false,
+    },
+
+
+});
+
+
+
 userSchema.pre('save', async function(){
     try{
         var user = this;

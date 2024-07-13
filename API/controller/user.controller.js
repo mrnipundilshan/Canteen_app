@@ -59,3 +59,18 @@ exports.getmenu = async (req,res)=>{
         res.status(500).json({message: 'Error fetching menu details', error: error});
     }
 };
+
+exports.placeorder = async(req,res,next)=>{
+    try{
+        
+        const {mobile_number,total,veg_count,veg_price,egg_count,egg_price,chicken_count,chicken_price,rice_count,rice_price,kottu_count,kottu_price,fish_count,fish_price} = req.body;
+        
+        const successRes = await UserService.placeorder(mobile_number,total,veg_count,veg_price,egg_count,egg_price,chicken_count,chicken_price,rice_count,rice_price,kottu_count,kottu_price,fish_count,fish_price);
+
+        res.json({status:true, success:"Order placed Successfully"});
+        
+    }catch(error){    
+
+        throw(error);
+    }
+}

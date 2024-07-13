@@ -8,5 +8,7 @@ router.post('/login',UserController.login);
 
 router.get('/getmenu',UserController.getmenu);
 
+router.post('/placeorder',UserController.placeorder);
+
 
 module.exports = router;
