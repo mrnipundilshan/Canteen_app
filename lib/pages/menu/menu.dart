@@ -57,6 +57,23 @@ class _menupageState extends State<menupage> {
 
   @override
   Widget build(BuildContext context) {
+    void placeorder() async {
+      var regbody = {
+        "veg_count": food_item.veg_count,
+        "veg_price": food_item.veg_price,
+        "egg_count": food_item.egg_count,
+        "egg_price": food_item.egg_price,
+        "chicken_count": food_item.chicken_count,
+        "chicken_price": food_item.chicken_price,
+        "rice_count": food_item.rice_count,
+        "rice_price": food_item.rice_price,
+        "kottu_count": food_item.kottu_count,
+        "kottu_price": food_item.kottu_price,
+        "fish_count": food_item.fish_count,
+        "fish_price": food_item.fish_price,
+      };
+    }
+
     Size size = MediaQuery.of(context).size;
 
     return ChangeNotifierProvider(
