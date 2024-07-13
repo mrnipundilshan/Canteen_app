@@ -59,6 +59,8 @@ class _menupageState extends State<menupage> {
   Widget build(BuildContext context) {
     void placeorder() async {
       var regbody = {
+        "mobile_number": mobile_number,
+        "total": Totalprovider().total,
         "veg_count": food_item.veg_count,
         "veg_price": food_item.veg_price,
         "egg_count": food_item.egg_count,
@@ -72,6 +74,22 @@ class _menupageState extends State<menupage> {
         "fish_count": food_item.fish_count,
         "fish_price": food_item.fish_price,
       };
+
+      try {
+        var response = await http.post(Uri.parse(placeorderapi),
+            headers: {"content-Type": "application/json"},
+            body: jsonEncode(regbody));
+
+        if (response.statusCode == 200) {
+          var jsonResponce = jsonDecode(response.body);
+          print("Response status: ${jsonResponce['status']}");
+        } else {
+          print("Server returned an error: ${response.statusCode}");
+          print("Response body: ${response.body}");
+        }
+      } catch (e) {
+        print("Place order failed: $e");
+      }
     }
 
     Size size = MediaQuery.of(context).size;
