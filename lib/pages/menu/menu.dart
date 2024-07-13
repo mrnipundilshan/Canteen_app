@@ -83,7 +83,7 @@ class _menupageState extends State<menupage> {
                       width: size.width * 0.12,
                     ),
                     Text(
-                      'Hi ' + mobile_number,
+                      'Hi $mobile_number',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: size.width * 0.05,
@@ -141,6 +141,12 @@ class _menupageState extends State<menupage> {
                             color: const Color.fromRGBO(119, 187, 162, 1.0),
                             borderRadius: BorderRadius.circular(10.0),
                           ),
+                          child: IconButton(
+                              color: const Color.fromARGB(255, 11, 105, 69),
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/login');
+                              },
+                              icon: const Icon(Icons.backspace_sharp)),
                         ),
                         Consumer<Totalprovider>(
                           builder: (context, totalprovider, child) => Container(
@@ -157,7 +163,7 @@ class _menupageState extends State<menupage> {
                             ),
                             alignment: Alignment.center,
                             child: Text(
-                              'Rs. ' + totalprovider.total.toString(),
+                              'Rs. ${totalprovider.total}',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: size.width * 0.05,
@@ -178,6 +184,12 @@ class _menupageState extends State<menupage> {
                             color: const Color.fromRGBO(119, 187, 162, 1.0),
                             borderRadius: BorderRadius.circular(10.0),
                           ),
+                          child: IconButton(
+                              color: const Color.fromARGB(255, 11, 105, 69),
+                              onPressed: () {
+                                print("object");
+                              },
+                              icon: const Icon(Icons.double_arrow)),
                         ),
                         SizedBox(width: size.width * 0.04),
                       ],
