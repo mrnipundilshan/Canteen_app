@@ -1,4 +1,6 @@
+import 'package:canteen/pages/menu/menu.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class food_card extends StatefulWidget {
   final String food_name;
@@ -14,6 +16,8 @@ class _food_cardState extends State<food_card> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final totalprovider = Provider.of<Totalprovider>(context, listen: false);
+
     return Container(
       padding: EdgeInsets.only(
           left: size.width * 0.03,
@@ -56,14 +60,7 @@ class _food_cardState extends State<food_card> {
           SizedBox(width: size.width * 0.05),
           Row(children: <Widget>[
             IconButton(
-                onPressed: () {
-                  setState(() {
-                    count = count + 1;
-                  });
-                },
-                icon: Icon(Icons.add_box_rounded)),
-            Text(count.toString()),
-            IconButton(
+                color: Color.fromARGB(255, 11, 105, 69),
                 onPressed: () {
                   setState(() {
                     if (count > 0) {
@@ -72,6 +69,22 @@ class _food_cardState extends State<food_card> {
                   });
                 },
                 icon: Icon(Icons.remove_circle)),
+            Text(
+              count.toString(),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: size.width * 0.05,
+                  color: const Color.fromRGBO(60, 121, 98, 1.0)),
+            ),
+            IconButton(
+                color: Color.fromARGB(255, 11, 105, 69),
+                onPressed: () {
+                  setState(() {
+                    count = count + 1;
+                    totalprovider.inctotal(widget.price);
+                  });
+                },
+                icon: Icon(Icons.add_box_rounded)),
           ]),
         ],
       ),

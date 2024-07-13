@@ -2,12 +2,21 @@ import 'dart:convert';
 import 'package:canteen/backgrounds/signup_bg.dart';
 import 'package:canteen/pages/menu/food_card.dart';
 import 'package:canteen/pages/menu/food_class.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:http/http.dart' as http;
 import 'package:canteen/config/config.dart';
+import 'package:provider/provider.dart';
+
+class Totalprovider with ChangeNotifier {
+  int total = 0;
+
+  inctotal(int price) {
+    total = total + price;
+    print(total);
+    notifyListeners();
+  }
+}
 
 class menupage extends StatefulWidget {
   // final token;
@@ -45,111 +54,125 @@ class _menupageState extends State<menupage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    return Scaffold(
-      body: Background(
-        child: Container(
-          width: double.infinity,
-          height: size.height,
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: size.height * 0.05,
-              ),
-              Row(
-                children: <Widget>[
-                  SizedBox(
-                    width: size.height * 0.01,
-                  ),
-                  Image.asset(
-                    "assets/profile.png",
-                    width: size.width * 0.12,
-                  ),
-                  SizedBox(
-                    width: size.height * 0.03,
-                  ),
-                  Image.asset(
-                    "assets/profile.png",
-                    width: size.width * 0.12,
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: size.height * 0.01,
-              ),
-              Text(
-                "2024.06.24 Menu",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: size.width * 0.06,
-                    color: const Color.fromRGBO(60, 121, 98, 1.0)),
-              ),
-              Expanded(
-                  child: FutureBuilder<List<Menu>>(
-                      future: menus,
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const CircularProgressIndicator.adaptive();
-                        } else if (snapshot.hasData) {
-                          final menus = snapshot.data!;
+    return ChangeNotifierProvider(
+      create: (context) => Totalprovider(),
+      child: Scaffold(
+        body: Background(
+          child: Container(
+            width: double.infinity,
+            height: size.height,
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: size.height * 0.05,
+                ),
+                Row(
+                  children: <Widget>[
+                    SizedBox(
+                      width: size.height * 0.01,
+                    ),
+                    Image.asset(
+                      "assets/profile.png",
+                      width: size.width * 0.12,
+                    ),
+                    SizedBox(
+                      width: size.height * 0.03,
+                    ),
+                    Image.asset(
+                      "assets/profile.png",
+                      width: size.width * 0.12,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: size.height * 0.01,
+                ),
+                Text(
+                  "2024.06.24 Menu",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: size.width * 0.06,
+                      color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                ),
+                Expanded(
+                    child: FutureBuilder<List<Menu>>(
+                        future: menus,
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const CircularProgressIndicator.adaptive();
+                          } else if (snapshot.hasData) {
+                            final menus = snapshot.data!;
 
-                          return buildmenus(menus);
-                        } else {
-                          return const Text("No Menu data");
-                        }
-                      })),
-              Stack(
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      SizedBox(width: size.width * 0.04),
-                      Container(
-                        padding: EdgeInsets.only(
-                            left: size.width * 0.03,
-                            top: size.width * 0.02,
-                            bottom: size.width * 0.02,
-                            right: size.width * 0.03),
-                        width: size.width * 0.25,
-                        height: size.height * 0.06,
-                        decoration: BoxDecoration(
-                          color: const Color.fromRGBO(119, 187, 162, 1.0),
-                          borderRadius: BorderRadius.circular(10.0),
+                            return buildmenus(menus);
+                          } else {
+                            return const Text("No Menu data");
+                          }
+                        })),
+                Stack(
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        SizedBox(width: size.width * 0.04),
+                        Container(
+                          padding: EdgeInsets.only(
+                              left: size.width * 0.03,
+                              top: size.width * 0.02,
+                              bottom: size.width * 0.02,
+                              right: size.width * 0.03),
+                          width: size.width * 0.25,
+                          height: size.height * 0.06,
+                          decoration: BoxDecoration(
+                            color: const Color.fromRGBO(119, 187, 162, 1.0),
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
                         ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(
-                            left: size.width * 0.03,
-                            top: size.width * 0.02,
-                            bottom: size.width * 0.02,
-                            right: size.width * 0.03),
-                        width: size.width * 0.35,
-                        height: size.height * 0.06,
-                        decoration: BoxDecoration(
-                          color: const Color.fromRGBO(119, 187, 162, 1.0),
-                          borderRadius: BorderRadius.circular(10.0),
+                        Consumer<Totalprovider>(
+                          builder: (context, totalprovider, child) => Container(
+                            padding: EdgeInsets.only(
+                                left: size.width * 0.03,
+                                top: size.width * 0.02,
+                                bottom: size.width * 0.02,
+                                right: size.width * 0.03),
+                            width: size.width * 0.35,
+                            height: size.height * 0.06,
+                            decoration: BoxDecoration(
+                              color: const Color.fromRGBO(119, 187, 162, 1.0),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              totalprovider.total.toString(),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: size.width * 0.05,
+                                  color:
+                                      const Color.fromRGBO(60, 121, 98, 1.0)),
+                            ),
+                          ),
                         ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(
-                            left: size.width * 0.03,
-                            top: size.width * 0.02,
-                            bottom: size.width * 0.02,
-                            right: size.width * 0.03),
-                        width: size.width * 0.25,
-                        height: size.height * 0.06,
-                        decoration: BoxDecoration(
-                          color: const Color.fromRGBO(119, 187, 162, 1.0),
-                          borderRadius: BorderRadius.circular(10.0),
+                        Container(
+                          padding: EdgeInsets.only(
+                              left: size.width * 0.03,
+                              top: size.width * 0.02,
+                              bottom: size.width * 0.02,
+                              right: size.width * 0.03),
+                          width: size.width * 0.25,
+                          height: size.height * 0.06,
+                          decoration: BoxDecoration(
+                            color: const Color.fromRGBO(119, 187, 162, 1.0),
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
                         ),
-                      ),
-                      SizedBox(width: size.width * 0.04),
-                    ],
-                  ),
-                  SizedBox(height: size.height * 0.15),
-                ],
-              )
-            ],
+                        SizedBox(width: size.width * 0.04),
+                      ],
+                    ),
+                    SizedBox(height: size.height * 0.15),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
