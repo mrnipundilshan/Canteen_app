@@ -1,4 +1,5 @@
 import 'package:canteen/backgrounds/signup_bg.dart';
+import 'package:canteen/pages/userorder/ordercard.dart';
 import 'package:flutter/material.dart';
 
 class orderpage extends StatefulWidget {
@@ -20,7 +21,9 @@ class _orderpageState extends State<orderpage> {
                     width: double.infinity,
                     height: size.height,
                     child: Column(
-                      children: <Widget>[],
+                      children: <Widget>[
+                        order_card(),
+                      ],
                     )))));
   }
 }
