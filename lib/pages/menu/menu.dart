@@ -4,10 +4,12 @@ import 'package:canteen/pages/menu/food_card.dart';
 import 'package:canteen/pages/menu/food_class.dart';
 import 'package:canteen/pages/menu/food_item.dart';
 import 'package:flutter/material.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:http/http.dart' as http;
 import 'package:canteen/config/config.dart';
 import 'package:provider/provider.dart';
+import 'package:lottie/lottie.dart';
 
 class Totalprovider with ChangeNotifier {
   int total = 0;
@@ -222,7 +224,73 @@ class _menupageState extends State<menupage> {
                             child: IconButton(
                                 color: const Color.fromARGB(255, 11, 105, 69),
                                 onPressed: () {
-                                  placeorder(totalprovider.total);
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return GiffyDialog.lottie(
+                                        backgroundColor: Colors.white,
+                                        entryAnimation: EntryAnimation.bottom,
+                                        Lottie.asset(
+                                          "assets/cooking.json",
+                                          height: 200,
+                                          fit: BoxFit.cover,
+                                        ),
+                                        title: Text(
+                                          'Confirm Your Order',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: size.width * 0.05,
+                                              color: const Color.fromRGBO(
+                                                  60, 121, 98, 1.0)),
+                                        ),
+                                        actions: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    context, 'CANCEL'),
+                                                child: Text(
+                                                  'CANCEL',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize:
+                                                          size.width * 0.035,
+                                                      color:
+                                                          const Color.fromRGBO(
+                                                              60,
+                                                              121,
+                                                              98,
+                                                              1.0)),
+                                                ),
+                                              ),
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    context, 'OK'),
+                                                child: Text(
+                                                  'OK',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize:
+                                                          size.width * 0.035,
+                                                      color:
+                                                          const Color.fromRGBO(
+                                                              60,
+                                                              121,
+                                                              98,
+                                                              1.0)),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
                                 },
                                 icon: const Icon(Icons.double_arrow)),
                           ),
