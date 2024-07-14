@@ -114,107 +114,126 @@ class _menupageState extends State<menupage> {
                     SizedBox(
                       width: size.height * 0.01,
                     ),
-                    InkWell(
-                      onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return GiffyDialog.lottie(
-                                backgroundColor: Colors.white,
-                                entryAnimation: EntryAnimation.bottom,
-                                Lottie.asset(
-                                  "assets/cooking.json",
-                                  height: 100,
-                                  fit: BoxFit.fitHeight,
-                                ),
-                                title: Text(
-                                  'Profile Details',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: size.width * 0.05,
-                                      color: const Color.fromRGBO(
-                                          60, 121, 98, 1.0)),
-                                ),
-                                content: Container(
-                                  height: 100,
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          const Text("Name:"),
-                                          SizedBox(
-                                            width: size.width * 0.01,
-                                          ),
-                                          Text("Nipun Dilshan"),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          Text("Mobile Number: "),
-                                          SizedBox(
-                                            width: size.width * 0.01,
-                                          ),
-                                          Text("0768521399"),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          Text("Address: "),
-                                          SizedBox(
-                                            width: size.width * 0.01,
-                                          ),
-                                          Text("Morakewa"),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                actions: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(context, 'CANCEL'),
-                                        child: Text(
-                                          'CANCEL',
+                    Stack(
+                      children: <Widget>[
+                        Image(
+                          image: AssetImage("assets/profile.png"),
+                          width: size.width * 0.12,
+                        ),
+                        Positioned.fill(
+                          child: Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              borderRadius: BorderRadius.circular(50),
+                              splashColor: Colors.black12,
+                              onTap: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return GiffyDialog.lottie(
+                                        backgroundColor: Colors.white,
+                                        entryAnimation: EntryAnimation.bottom,
+                                        Lottie.asset(
+                                          "assets/cooking.json",
+                                          height: 100,
+                                          fit: BoxFit.fitHeight,
+                                        ),
+                                        title: Text(
+                                          'Profile Details',
+                                          textAlign: TextAlign.center,
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
-                                              fontSize: size.width * 0.035,
+                                              fontSize: size.width * 0.05,
                                               color: const Color.fromRGBO(
                                                   60, 121, 98, 1.0)),
                                         ),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.pop(context, 'OK');
-                                        },
-                                        child: Text('OK',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: size.width * 0.035,
-                                                color: const Color.fromRGBO(
-                                                    60, 121, 98, 1.0))),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              );
-                            });
-                      },
-                      splashColor: Colors.black38, // Set the splash color
-                      child: Image.asset(
-                        "assets/profile.png",
-                        width: size.width * 0.12,
-                      ),
+                                        content: Container(
+                                          height: 100,
+                                          child: Column(
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: <Widget>[
+                                                  const Text("Name:"),
+                                                  SizedBox(
+                                                    width: size.width * 0.01,
+                                                  ),
+                                                  Text("Nipun Dilshan"),
+                                                ],
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: <Widget>[
+                                                  Text("Mobile Number: "),
+                                                  SizedBox(
+                                                    width: size.width * 0.01,
+                                                  ),
+                                                  Text("0768521399"),
+                                                ],
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: <Widget>[
+                                                  Text("Address: "),
+                                                  SizedBox(
+                                                    width: size.width * 0.01,
+                                                  ),
+                                                  Text("Morakewa"),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        actions: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    context, 'CANCEL'),
+                                                child: Text(
+                                                  'CANCEL',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize:
+                                                          size.width * 0.035,
+                                                      color:
+                                                          const Color.fromRGBO(
+                                                              60,
+                                                              121,
+                                                              98,
+                                                              1.0)),
+                                                ),
+                                              ),
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context, 'OK');
+                                                },
+                                                child: Text('OK',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize:
+                                                            size.width * 0.035,
+                                                        color: const Color
+                                                            .fromRGBO(
+                                                            60, 121, 98, 1.0))),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      );
+                                    });
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     Text(
                       'Hi $mobile_number',
