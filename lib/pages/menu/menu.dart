@@ -357,7 +357,7 @@ class _menupageState extends State<menupage> {
             backgroundColor: Colors.white,
             entryAnimation: EntryAnimation.bottom,
             Lottie.asset(
-              "assets/cooking.json",
+              "assets/profile.json",
               height: 100,
               fit: BoxFit.fitHeight,
             ),

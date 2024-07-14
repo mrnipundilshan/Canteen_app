@@ -81,8 +81,8 @@ exports.getprodetails = async (req,res)=>{
         const {mobile_number} = req.body;
 
         const collection = db.collection('users');
-        const user = await collection.findOne({});
-        if (!mobile_number) {
+        const user = await collection.findOne({mobile_number: mobile_number});
+        if (!user) {
             return res.status(404).json({ message: 'User not found' });
           }
         res.status(200).json(user);

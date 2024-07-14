@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:canteen/config/config.dart';
+import 'package:canteen/loginpage.dart';
 import 'package:flutter/material.dart';
 import 'package:canteen/backgrounds/signup_bg.dart';
 import 'package:http/http.dart' as http;
@@ -39,6 +40,9 @@ class _RegisterpageState extends State<Registerpage> {
           var response = await http.post(Uri.parse(register),
               headers: {"content-Type": "application/json"},
               body: jsonEncode(regbody));
+
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => login()));
 
           if (response.statusCode == 200) {
             var jsonResponce = jsonDecode(response.body);
