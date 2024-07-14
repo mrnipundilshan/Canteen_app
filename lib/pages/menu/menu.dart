@@ -114,9 +114,67 @@ class _menupageState extends State<menupage> {
                     SizedBox(
                       width: size.height * 0.01,
                     ),
-                    Image.asset(
-                      "assets/profile.png",
-                      width: size.width * 0.12,
+                    InkWell(
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return GiffyDialog.lottie(
+                                backgroundColor: Colors.white,
+                                entryAnimation: EntryAnimation.bottom,
+                                Lottie.asset(
+                                  "assets/cooking.json",
+                                  height: 200,
+                                  fit: BoxFit.cover,
+                                ),
+                                title: Text(
+                                  'Confirm Your Order',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: size.width * 0.05,
+                                      color: const Color.fromRGBO(
+                                          60, 121, 98, 1.0)),
+                                ),
+                                actions: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(context, 'CANCEL'),
+                                        child: Text(
+                                          'CANCEL',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: size.width * 0.035,
+                                              color: const Color.fromRGBO(
+                                                  60, 121, 98, 1.0)),
+                                        ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context, 'OK');
+                                        },
+                                        child: Text('OK',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: size.width * 0.035,
+                                                color: const Color.fromRGBO(
+                                                    60, 121, 98, 1.0))),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              );
+                            });
+                      },
+                      splashColor: Colors.black38, // Set the splash color
+                      child: Image.asset(
+                        "assets/profile.png",
+                        width: size.width * 0.12,
+                      ),
                     ),
                     Text(
                       'Hi $mobile_number',
@@ -224,73 +282,74 @@ class _menupageState extends State<menupage> {
                             child: IconButton(
                                 color: const Color.fromARGB(255, 11, 105, 69),
                                 onPressed: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return GiffyDialog.lottie(
-                                        backgroundColor: Colors.white,
-                                        entryAnimation: EntryAnimation.bottom,
-                                        Lottie.asset(
-                                          "assets/cooking.json",
-                                          height: 200,
-                                          fit: BoxFit.cover,
-                                        ),
-                                        title: Text(
-                                          'Confirm Your Order',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: size.width * 0.05,
-                                              color: const Color.fromRGBO(
-                                                  60, 121, 98, 1.0)),
-                                        ),
-                                        actions: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    context, 'CANCEL'),
-                                                child: Text(
-                                                  'CANCEL',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize:
-                                                          size.width * 0.035,
-                                                      color:
-                                                          const Color.fromRGBO(
-                                                              60,
-                                                              121,
-                                                              98,
-                                                              1.0)),
-                                                ),
-                                              ),
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    context, 'OK'),
-                                                child: Text(
-                                                  'OK',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize:
-                                                          size.width * 0.035,
-                                                      color:
-                                                          const Color.fromRGBO(
-                                                              60,
-                                                              121,
-                                                              98,
-                                                              1.0)),
-                                                ),
-                                              ),
-                                            ],
+                                  if (totalprovider.total > 0) {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return GiffyDialog.lottie(
+                                          backgroundColor: Colors.white,
+                                          entryAnimation: EntryAnimation.bottom,
+                                          Lottie.asset(
+                                            "assets/cooking.json",
+                                            height: 200,
+                                            fit: BoxFit.cover,
                                           ),
-                                        ],
-                                      );
-                                    },
-                                  );
+                                          title: Text(
+                                            'Confirm Your Order',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: size.width * 0.05,
+                                                color: const Color.fromRGBO(
+                                                    60, 121, 98, 1.0)),
+                                          ),
+                                          actions: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          context, 'CANCEL'),
+                                                  child: Text(
+                                                    'CANCEL',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize:
+                                                            size.width * 0.035,
+                                                        color: const Color
+                                                            .fromRGBO(
+                                                            60, 121, 98, 1.0)),
+                                                  ),
+                                                ),
+                                                TextButton(
+                                                  onPressed: () {
+                                                    placeorder(
+                                                        totalprovider.total);
+
+                                                    Navigator.pop(
+                                                        context, 'OK');
+                                                  },
+                                                  child: Text('OK',
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: size.width *
+                                                              0.035,
+                                                          color: const Color
+                                                              .fromRGBO(60, 121,
+                                                              98, 1.0))),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  }
                                 },
                                 icon: const Icon(Icons.double_arrow)),
                           ),

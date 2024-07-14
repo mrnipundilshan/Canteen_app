@@ -14,6 +14,13 @@ class food_card extends StatefulWidget {
 
 class _food_cardState extends State<food_card> {
   int count = 0;
+
+  void resetCount() {
+    setState(() {
+      count = 0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
