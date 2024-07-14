@@ -7,7 +7,7 @@ const orderSchema = new Schema({
     mobile_number:{
         type:String,
         required : true,
-        unique : true,
+        unique : false,
     },
     total:{
         type:Number,

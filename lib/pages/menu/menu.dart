@@ -57,10 +57,10 @@ class _menupageState extends State<menupage> {
 
   @override
   Widget build(BuildContext context) {
-    void placeorder() async {
+    void placeorder(int total) async {
       var regbody = {
         "mobile_number": mobile_number,
-        "total": Totalprovider().total,
+        "total": total,
         "veg_count": food_item.veg_count,
         "veg_price": food_item.veg_price,
         "egg_count": food_item.egg_count,
@@ -206,22 +206,26 @@ class _menupageState extends State<menupage> {
                             ),
                           ),
                         ),
-                        Container(
-                          padding: EdgeInsets.only(
-                              left: size.width * 0.03,
-                              top: size.width * 0.02,
-                              bottom: size.width * 0.02,
-                              right: size.width * 0.03),
-                          width: size.width * 0.25,
-                          height: size.height * 0.06,
-                          decoration: BoxDecoration(
-                            color: const Color.fromRGBO(119, 187, 162, 1.0),
-                            borderRadius: BorderRadius.circular(10.0),
+                        Consumer<Totalprovider>(
+                          builder: (context, totalprovider, child) => Container(
+                            padding: EdgeInsets.only(
+                                left: size.width * 0.03,
+                                top: size.width * 0.02,
+                                bottom: size.width * 0.02,
+                                right: size.width * 0.03),
+                            width: size.width * 0.25,
+                            height: size.height * 0.06,
+                            decoration: BoxDecoration(
+                              color: const Color.fromRGBO(119, 187, 162, 1.0),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: IconButton(
+                                color: const Color.fromARGB(255, 11, 105, 69),
+                                onPressed: () {
+                                  placeorder(totalprovider.total);
+                                },
+                                icon: const Icon(Icons.double_arrow)),
                           ),
-                          child: IconButton(
-                              color: const Color.fromARGB(255, 11, 105, 69),
-                              onPressed: () {},
-                              icon: const Icon(Icons.double_arrow)),
                         ),
                         SizedBox(width: size.width * 0.04),
                       ],
