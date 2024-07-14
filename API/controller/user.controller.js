@@ -60,6 +60,7 @@ exports.getmenu = async (req,res)=>{
     }
 };
 
+
 exports.placeorder = async(req,res,next)=>{
     try{
         
@@ -74,3 +75,18 @@ exports.placeorder = async(req,res,next)=>{
         throw(error);
     }
 }
+
+exports.getprodetails = async (req,res)=>{
+    try{
+        const {mobile_number} = req.body;
+
+        const collection = db.collection('users');
+        const user = await collection.findOne({});
+        if (!mobile_number) {
+            return res.status(404).json({ message: 'User not found' });
+          }
+        res.status(200).json(user);
+    } catch(error){
+        res.status(500).json({message: 'Error fetching menu details', error: error});
+    }
+};

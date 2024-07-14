@@ -151,39 +151,10 @@ class _menupageState extends State<menupage> {
                                           height: 100,
                                           child: Column(
                                             children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: <Widget>[
-                                                  const Text("Name:"),
-                                                  SizedBox(
-                                                    width: size.width * 0.01,
-                                                  ),
-                                                  Text("Nipun Dilshan"),
-                                                ],
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: <Widget>[
-                                                  Text("Mobile Number: "),
-                                                  SizedBox(
-                                                    width: size.width * 0.01,
-                                                  ),
-                                                  Text("0768521399"),
-                                                ],
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: <Widget>[
-                                                  Text("Address: "),
-                                                  SizedBox(
-                                                    width: size.width * 0.01,
-                                                  ),
-                                                  Text("Morakewa"),
-                                                ],
-                                              ),
+                                              profilerowwidget(size: size),
+                                              profilerowwidget(size: size),
+                                              profilerowwidget(size: size),
+                                              profilerowwidget(size: size),
                                             ],
                                           ),
                                         ),
@@ -424,6 +395,39 @@ class _menupageState extends State<menupage> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class profilerowwidget extends StatelessWidget {
+  const profilerowwidget({
+    super.key,
+    required this.size,
+  });
+
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text(
+          "Name:",
+          style: TextStyle(
+              fontSize: size.width * 0.035,
+              color: const Color.fromRGBO(60, 121, 98, 1.0)),
+        ),
+        SizedBox(
+          width: size.width * 0.01,
+        ),
+        Text(
+          "Nipun Dilshan",
+          style: TextStyle(
+              fontSize: size.width * 0.035,
+              color: const Color.fromRGBO(60, 121, 98, 1.0)),
+        ),
+      ],
     );
   }
 }

@@ -10,5 +10,7 @@ router.get('/getmenu',UserController.getmenu);
 
 router.post('/placeorder',UserController.placeorder);
 
+router.post('/getprodetails',UserController.getprodetails);
+
 
 module.exports = router;
