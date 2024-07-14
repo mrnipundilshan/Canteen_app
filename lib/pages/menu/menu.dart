@@ -3,6 +3,7 @@ import 'package:canteen/backgrounds/signup_bg.dart';
 import 'package:canteen/pages/menu/food_card.dart';
 import 'package:canteen/pages/menu/food_class.dart';
 import 'package:canteen/pages/menu/food_item.dart';
+import 'package:canteen/pages/userorder/orderpage.dart';
 import 'package:flutter/material.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
@@ -164,9 +165,28 @@ class _menupageState extends State<menupage> {
                           fontSize: size.width * 0.05,
                           color: const Color.fromRGBO(60, 121, 98, 1.0)),
                     ),
-                    Image.asset(
-                      "assets/profile.png",
-                      width: size.width * 0.12,
+                    Stack(
+                      children: <Widget>[
+                        Image(
+                          image: AssetImage("assets/profile.png"),
+                          width: size.width * 0.12,
+                        ),
+                        Positioned.fill(
+                          child: Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              borderRadius: BorderRadius.circular(50),
+                              splashColor: Colors.black12,
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => orderpage()));
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(
                       width: size.height * 0.01,
@@ -355,7 +375,6 @@ class _menupageState extends State<menupage> {
         builder: (BuildContext context) {
           return GiffyDialog.lottie(
             backgroundColor: Colors.white,
-            entryAnimation: EntryAnimation.bottom,
             Lottie.asset(
               "assets/profile.json",
               height: 100,
@@ -397,7 +416,7 @@ class _menupageState extends State<menupage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        "Mobile Number:",
+                        "Number:",
                         style: TextStyle(
                             fontSize: size.width * 0.035,
                             color: const Color.fromRGBO(60, 121, 98, 1.0)),

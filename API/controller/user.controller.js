@@ -90,3 +90,16 @@ exports.getprodetails = async (req,res)=>{
         res.status(500).json({message: 'Error fetching menu details', error: error});
     }
 };
+
+
+exports.getuserorders = async (req,res)=>{
+    try{
+        const {mobile_number} = req.body;
+        
+        const collection = db.collection('orders');
+        const orders = await collection.find({mobile_number: mobile_number}).toArray();
+        res.status(200).json(orders);
+    } catch(error){
+        res.status(500).json({message: 'Error fetching menu details', error: error});
+    }
+};
