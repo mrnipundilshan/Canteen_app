@@ -124,17 +124,57 @@ class _menupageState extends State<menupage> {
                                 entryAnimation: EntryAnimation.bottom,
                                 Lottie.asset(
                                   "assets/cooking.json",
-                                  height: 200,
-                                  fit: BoxFit.cover,
+                                  height: 100,
+                                  fit: BoxFit.fitHeight,
                                 ),
                                 title: Text(
-                                  'Confirm Your Order',
+                                  'Profile Details',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: size.width * 0.05,
                                       color: const Color.fromRGBO(
                                           60, 121, 98, 1.0)),
+                                ),
+                                content: Container(
+                                  height: 100,
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          const Text("Name:"),
+                                          SizedBox(
+                                            width: size.width * 0.01,
+                                          ),
+                                          Text("Nipun Dilshan"),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          Text("Mobile Number: "),
+                                          SizedBox(
+                                            width: size.width * 0.01,
+                                          ),
+                                          Text("0768521399"),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          Text("Address: "),
+                                          SizedBox(
+                                            width: size.width * 0.01,
+                                          ),
+                                          Text("Morakewa"),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 actions: [
                                   Row(
