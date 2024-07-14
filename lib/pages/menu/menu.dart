@@ -39,6 +39,10 @@ class menupage extends StatefulWidget {
 class _menupageState extends State<menupage> {
   Future<List<Menu>> menus = getmenu();
 
+  String proname = "";
+  String profac = "";
+  String proaddress = "";
+
   static Future<List<Menu>> getmenu() async {
     final response = await http.get(Uri.parse(menulist));
     final body = json.decode(response.body);
@@ -59,6 +63,25 @@ class _menupageState extends State<menupage> {
 
   @override
   Widget build(BuildContext context) {
+    void getprofiledetails(size) async {
+      var regbody = {
+        "mobile_number": mobile_number,
+      };
+
+      var response = await http.post(Uri.parse(getprodetails),
+          headers: {"content-Type": "application/json"},
+          body: jsonEncode(regbody));
+
+      var jsonResponse = jsonDecode(response.body);
+      print(jsonResponse);
+
+      proname = jsonResponse['name'];
+      profac = jsonResponse['faculty'];
+      proaddress = jsonResponse['address'];
+
+      profileshowdialog(size);
+    }
+
     void placeorder(int total) async {
       var regbody = {
         "mobile_number": mobile_number,
@@ -127,79 +150,7 @@ class _menupageState extends State<menupage> {
                               borderRadius: BorderRadius.circular(50),
                               splashColor: Colors.black12,
                               onTap: () {
-                                showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return GiffyDialog.lottie(
-                                        backgroundColor: Colors.white,
-                                        entryAnimation: EntryAnimation.bottom,
-                                        Lottie.asset(
-                                          "assets/cooking.json",
-                                          height: 100,
-                                          fit: BoxFit.fitHeight,
-                                        ),
-                                        title: Text(
-                                          'Profile Details',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: size.width * 0.05,
-                                              color: const Color.fromRGBO(
-                                                  60, 121, 98, 1.0)),
-                                        ),
-                                        content: Container(
-                                          height: 100,
-                                          child: Column(
-                                            children: [
-                                              profilerowwidget(size: size),
-                                              profilerowwidget(size: size),
-                                              profilerowwidget(size: size),
-                                              profilerowwidget(size: size),
-                                            ],
-                                          ),
-                                        ),
-                                        actions: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    context, 'CANCEL'),
-                                                child: Text(
-                                                  'CANCEL',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize:
-                                                          size.width * 0.035,
-                                                      color:
-                                                          const Color.fromRGBO(
-                                                              60,
-                                                              121,
-                                                              98,
-                                                              1.0)),
-                                                ),
-                                              ),
-                                              TextButton(
-                                                onPressed: () {
-                                                  Navigator.pop(context, 'OK');
-                                                },
-                                                child: Text('OK',
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize:
-                                                            size.width * 0.035,
-                                                        color: const Color
-                                                            .fromRGBO(
-                                                            60, 121, 98, 1.0))),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      );
-                                    });
+                                getprofiledetails(size);
                               },
                             ),
                           ),
@@ -397,38 +348,143 @@ class _menupageState extends State<menupage> {
       ),
     );
   }
-}
 
-class profilerowwidget extends StatelessWidget {
-  const profilerowwidget({
-    super.key,
-    required this.size,
-  });
-
-  final Size size;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Text(
-          "Name:",
-          style: TextStyle(
-              fontSize: size.width * 0.035,
-              color: const Color.fromRGBO(60, 121, 98, 1.0)),
-        ),
-        SizedBox(
-          width: size.width * 0.01,
-        ),
-        Text(
-          "Nipun Dilshan",
-          style: TextStyle(
-              fontSize: size.width * 0.035,
-              color: const Color.fromRGBO(60, 121, 98, 1.0)),
-        ),
-      ],
-    );
+  void profileshowdialog(Size size) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return GiffyDialog.lottie(
+            backgroundColor: Colors.white,
+            entryAnimation: EntryAnimation.bottom,
+            Lottie.asset(
+              "assets/cooking.json",
+              height: 100,
+              fit: BoxFit.fitHeight,
+            ),
+            title: Text(
+              'Profile Details',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: size.width * 0.05,
+                  color: const Color.fromRGBO(60, 121, 98, 1.0)),
+            ),
+            content: Container(
+              height: 100,
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "Name:",
+                        style: TextStyle(
+                            fontSize: size.width * 0.035,
+                            color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                      ),
+                      SizedBox(
+                        width: size.width * 0.01,
+                      ),
+                      Text(
+                        proname,
+                        style: TextStyle(
+                            fontSize: size.width * 0.035,
+                            color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "Mobile Number:",
+                        style: TextStyle(
+                            fontSize: size.width * 0.035,
+                            color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                      ),
+                      SizedBox(
+                        width: size.width * 0.01,
+                      ),
+                      Text(
+                        mobile_number,
+                        style: TextStyle(
+                            fontSize: size.width * 0.035,
+                            color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "Faculty:",
+                        style: TextStyle(
+                            fontSize: size.width * 0.035,
+                            color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                      ),
+                      SizedBox(
+                        width: size.width * 0.01,
+                      ),
+                      Text(
+                        profac,
+                        style: TextStyle(
+                            fontSize: size.width * 0.035,
+                            color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "Address:",
+                        style: TextStyle(
+                            fontSize: size.width * 0.035,
+                            color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                      ),
+                      SizedBox(
+                        width: size.width * 0.01,
+                      ),
+                      Text(
+                        proaddress,
+                        style: TextStyle(
+                            fontSize: size.width * 0.035,
+                            color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            actions: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, 'CANCEL'),
+                    child: Text(
+                      'CANCEL',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: size.width * 0.035,
+                          color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context, 'OK');
+                    },
+                    child: Text('OK',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: size.width * 0.035,
+                            color: const Color.fromRGBO(60, 121, 98, 1.0))),
+                  ),
+                ],
+              ),
+            ],
+          );
+        });
   }
 }
 
