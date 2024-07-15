@@ -26,7 +26,6 @@ class _orderpageState extends State<orderpage> {
         body: jsonEncode(regbody));
 
     var jsonResponse = jsonDecode(response.body);
-    print(jsonResponse);
     return jsonResponse.map<Order>(Order.fromJson).toList();
   }
 
@@ -36,9 +35,6 @@ class _orderpageState extends State<orderpage> {
     super.initState();
 
     orders = getorderlist(widget.mobilenumber);
-    orders.then((orderList) {
-      print('Orders length: ${orderList.length}');
-    });
   }
 
   @override
@@ -54,7 +50,37 @@ class _orderpageState extends State<orderpage> {
                     child: Column(
                       children: <Widget>[
                         SizedBox(
-                          height: size.height * 0.1,
+                          height: size.height * 0.05,
+                        ),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          child: Stack(
+                            children: <Widget>[
+                              Padding(
+                                padding:
+                                    EdgeInsets.only(left: size.width * 0.045),
+                                child: Image(
+                                  image: AssetImage("assets/back.png"),
+                                  width: size.width * 0.12,
+                                ),
+                              ),
+                              Positioned.fill(
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: InkWell(
+                                    borderRadius: BorderRadius.circular(50),
+                                    splashColor: Colors.black12,
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: size.height * 0.02,
                         ),
                         Expanded(
                             child: FutureBuilder<List<Order>>(
@@ -98,7 +124,8 @@ Widget buildorders(List<Order> orders) {
           kottu_count: Order.kottu_count,
           kottu_price: Order.kottu_price,
           fish_count: Order.fish_count,
-          fish_price: Order.fish_price);
+          fish_price: Order.fish_price,
+          orderid: Order.orderid);
     },
   );
 }

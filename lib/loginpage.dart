@@ -99,6 +99,7 @@ class _loginState extends State<login> {
                             borderRadius: BorderRadius.circular(30.0),
                           ),
                           child: TextField(
+                            maxLength: 10,
                             controller: mobiletextcontroller,
                             style: TextStyle(
                                 fontWeight: FontWeight.w800,
@@ -107,6 +108,7 @@ class _loginState extends State<login> {
                             textAlign: TextAlign.center,
                             cursorColor: const Color.fromRGBO(60, 121, 98, 1.0),
                             decoration: const InputDecoration(
+                              counterText: '',
                               hintText: "Mobile Number",
                               hintStyle: TextStyle(
                                   color: Color.fromRGBO(60, 121, 98, 1.0),
@@ -126,6 +128,7 @@ class _loginState extends State<login> {
                             borderRadius: BorderRadius.circular(30.0),
                           ),
                           child: TextField(
+                            obscureText: true,
                             controller: passwordtextcontroller,
                             style: TextStyle(
                                 fontWeight: FontWeight.w800,

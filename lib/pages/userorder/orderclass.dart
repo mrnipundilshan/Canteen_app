@@ -12,6 +12,7 @@ class Order {
   final int kottu_price;
   final int fish_count;
   final int fish_price;
+  final String orderid;
 
   const Order({
     required this.total,
@@ -27,6 +28,7 @@ class Order {
     required this.kottu_price,
     required this.fish_count,
     required this.fish_price,
+    required this.orderid,
   });
 
   static Order fromJson(json) => Order(
@@ -43,5 +45,6 @@ class Order {
         kottu_price: json['kottu_price'],
         fish_count: json['fish_count'],
         fish_price: json['fish_price'],
+        orderid: json['_id'],
       );
 }

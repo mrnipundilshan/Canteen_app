@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class order_card extends StatefulWidget {
   final int total;
@@ -14,6 +15,7 @@ class order_card extends StatefulWidget {
   final int kottu_price;
   final int fish_count;
   final int fish_price;
+  final String orderid;
 
   const order_card(
       {super.key,
@@ -29,7 +31,8 @@ class order_card extends StatefulWidget {
       required this.kottu_count,
       required this.kottu_price,
       required this.fish_count,
-      required this.fish_price});
+      required this.fish_price,
+      required this.orderid});
   @override
   State<order_card> createState() => _order_cardState();
 }
@@ -41,7 +44,7 @@ class _order_cardState extends State<order_card> {
     int eggtotal = widget.egg_count * widget.egg_price;
     int chickentotal = widget.chicken_count * widget.chicken_price;
     int ricetotal = widget.rice_count * widget.rice_price;
-    int kottutotal = widget.kottu_count * widget.veg_price;
+    int kottutotal = widget.kottu_count * widget.kottu_price;
     int fishtotal = widget.fish_count * widget.fish_price;
     Size size = MediaQuery.of(context).size;
 
@@ -62,12 +65,27 @@ class _order_cardState extends State<order_card> {
       ),
       child: Column(
         children: <Widget>[
-          Text(
-            "Order 01",
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: size.width * 0.05,
-                color: const Color.fromRGBO(60, 121, 98, 1.0)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                "ID: " + widget.orderid,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: size.width * 0.03,
+                    color: const Color.fromRGBO(60, 121, 98, 1.0)),
+              ),
+              IconButton(
+                  iconSize: size.width * 0.035,
+                  color: const Color.fromARGB(255, 11, 105, 69),
+                  onPressed: () {
+                    Clipboard.setData(ClipboardData(text: widget.orderid));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Your Order ID coppied')),
+                    );
+                  },
+                  icon: const Icon(Icons.copy)),
+            ],
           ),
           Table(
             columnWidths: const {
@@ -143,6 +161,37 @@ class _order_cardState extends State<order_card> {
                   Container(
                     alignment: Alignment.centerLeft,
                     child: Text(
+                      "Fish",
+                      style: TextStyle(
+                          fontSize: size.width * 0.045,
+                          color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      widget.fish_count.toString(),
+                      style: TextStyle(
+                          fontSize: size.width * 0.045,
+                          color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      fishtotal.toString(),
+                      style: TextStyle(
+                          fontSize: size.width * 0.045,
+                          color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                    ),
+                  ),
+                ],
+              ),
+              TableRow(
+                children: [
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
                       "Chicken",
                       style: TextStyle(
                           fontSize: size.width * 0.045,
@@ -161,7 +210,69 @@ class _order_cardState extends State<order_card> {
                   Container(
                     alignment: Alignment.centerRight,
                     child: Text(
-                      widget.chicken_price.toString(),
+                      chickentotal.toString(),
+                      style: TextStyle(
+                          fontSize: size.width * 0.045,
+                          color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                    ),
+                  ),
+                ],
+              ),
+              TableRow(
+                children: [
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Rice",
+                      style: TextStyle(
+                          fontSize: size.width * 0.045,
+                          color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      widget.rice_count.toString(),
+                      style: TextStyle(
+                          fontSize: size.width * 0.045,
+                          color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      ricetotal.toString(),
+                      style: TextStyle(
+                          fontSize: size.width * 0.045,
+                          color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                    ),
+                  ),
+                ],
+              ),
+              TableRow(
+                children: [
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Kottu",
+                      style: TextStyle(
+                          fontSize: size.width * 0.045,
+                          color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      widget.kottu_count.toString(),
+                      style: TextStyle(
+                          fontSize: size.width * 0.045,
+                          color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      kottutotal.toString(),
                       style: TextStyle(
                           fontSize: size.width * 0.045,
                           color: const Color.fromRGBO(60, 121, 98, 1.0)),

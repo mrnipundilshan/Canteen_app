@@ -98,6 +98,7 @@ class _RegisterpageState extends State<Registerpage> {
                   borderRadius: BorderRadius.circular(30.0),
                 ),
                 child: TextField(
+                  maxLength: 10,
                   controller: mobiletextcontroller,
                   style: TextStyle(
                       fontWeight: FontWeight.w800,
@@ -106,6 +107,7 @@ class _RegisterpageState extends State<Registerpage> {
                   textAlign: TextAlign.center,
                   cursorColor: const Color.fromRGBO(60, 121, 98, 1.0),
                   decoration: const InputDecoration(
+                    counterText: '',
                     hintText: "Mobile Number",
                     hintStyle: TextStyle(
                         color: Color.fromRGBO(60, 121, 98, 1.0),
@@ -125,6 +127,7 @@ class _RegisterpageState extends State<Registerpage> {
                   borderRadius: BorderRadius.circular(30.0),
                 ),
                 child: TextField(
+                  maxLength: 15,
                   controller: nametextcontroller,
                   style: TextStyle(
                       fontWeight: FontWeight.w800,
@@ -133,6 +136,7 @@ class _RegisterpageState extends State<Registerpage> {
                   textAlign: TextAlign.center,
                   cursorColor: const Color.fromRGBO(60, 121, 98, 1.0),
                   decoration: const InputDecoration(
+                    counterText: '',
                     hintText: "Name",
                     hintStyle: TextStyle(
                         color: Color.fromRGBO(60, 121, 98, 1.0),
@@ -230,6 +234,7 @@ class _RegisterpageState extends State<Registerpage> {
                   borderRadius: BorderRadius.circular(30.0),
                 ),
                 child: TextField(
+                  maxLength: 20,
                   controller: addresstextcontroller,
                   style: TextStyle(
                       fontWeight: FontWeight.w800,
@@ -238,6 +243,7 @@ class _RegisterpageState extends State<Registerpage> {
                   textAlign: TextAlign.center,
                   cursorColor: const Color.fromRGBO(60, 121, 98, 1.0),
                   decoration: const InputDecoration(
+                    counterText: '',
                     hintText: "Adress",
                     hintStyle: TextStyle(
                         color: Color.fromRGBO(60, 121, 98, 1.0),
