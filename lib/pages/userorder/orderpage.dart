@@ -35,7 +35,10 @@ class _orderpageState extends State<orderpage> {
     //TODO: implement initState
     super.initState();
 
-    getorderlist(widget.mobilenumber);
+    orders = getorderlist(widget.mobilenumber);
+    orders.then((orderList) {
+      print('Orders length: ${orderList.length}');
+    });
   }
 
   @override
@@ -53,22 +56,22 @@ class _orderpageState extends State<orderpage> {
                         SizedBox(
                           height: size.height * 0.1,
                         ),
-                        // Expanded(
-                        //     child: FutureBuilder<List<Order>>(
-                        //         future: orders,
-                        //         builder: (context, snapshot) {
-                        //           if (snapshot.connectionState ==
-                        //               ConnectionState.waiting) {
-                        //             return const CircularProgressIndicator
-                        //                 .adaptive();
-                        //           } else if (snapshot.hasData) {
-                        //             final orders = snapshot.data!;
+                        Expanded(
+                            child: FutureBuilder<List<Order>>(
+                                future: orders,
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return const CircularProgressIndicator
+                                        .adaptive();
+                                  } else if (snapshot.hasData) {
+                                    final orders = snapshot.data!;
 
-                        //             return buildorders(orders);
-                        //           } else {
-                        //             return const Text("No Menu data");
-                        //           }
-                        //         })),
+                                    return buildorders(orders);
+                                  } else {
+                                    return const Text("No Menu data");
+                                  }
+                                })),
                       ],
                     )))));
   }

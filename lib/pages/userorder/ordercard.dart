@@ -37,6 +37,12 @@ class order_card extends StatefulWidget {
 class _order_cardState extends State<order_card> {
   @override
   Widget build(BuildContext context) {
+    int vegtotal = widget.veg_count * widget.veg_price;
+    int eggtotal = widget.egg_count * widget.egg_price;
+    int chickentotal = widget.chicken_count * widget.chicken_price;
+    int ricetotal = widget.rice_count * widget.rice_price;
+    int kottutotal = widget.kottu_count * widget.veg_price;
+    int fishtotal = widget.fish_count * widget.fish_price;
     Size size = MediaQuery.of(context).size;
 
     return Container(
@@ -63,86 +69,115 @@ class _order_cardState extends State<order_card> {
                 fontSize: size.width * 0.05,
                 color: const Color.fromRGBO(60, 121, 98, 1.0)),
           ),
-          Column(
+          Table(
+            columnWidths: const {
+              0: FlexColumnWidth(1),
+              1: FlexColumnWidth(1),
+              2: FlexColumnWidth(1),
+            },
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              TableRow(
                 children: <Widget>[
-                  Text(
-                    "Order 01",
-                    style: TextStyle(
-                        fontSize: size.width * 0.045,
-                        color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Veg",
+                      style: TextStyle(
+                          fontSize: size.width * 0.045,
+                          color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                    ),
                   ),
-                  Text(
-                    "02",
-                    style: TextStyle(
-                        fontSize: size.width * 0.045,
-                        color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                  Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      widget.veg_count.toString(),
+                      style: TextStyle(
+                          fontSize: size.width * 0.045,
+                          color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                    ),
                   ),
-                  Text(
-                    "200",
-                    style: TextStyle(
-                        fontSize: size.width * 0.045,
-                        color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                  Container(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      vegtotal.toString(),
+                      style: TextStyle(
+                          fontSize: size.width * 0.045,
+                          color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                    ),
                   ),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    "Order 01",
-                    style: TextStyle(
-                        fontSize: size.width * 0.045,
-                        color: const Color.fromRGBO(60, 121, 98, 1.0)),
+              TableRow(
+                children: [
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Egg",
+                      style: TextStyle(
+                          fontSize: size.width * 0.045,
+                          color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                    ),
                   ),
-                  Text(
-                    "02",
-                    style: TextStyle(
-                        fontSize: size.width * 0.045,
-                        color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                  Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      widget.egg_count.toString(),
+                      style: TextStyle(
+                          fontSize: size.width * 0.045,
+                          color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                    ),
                   ),
-                  Text(
-                    "200",
-                    style: TextStyle(
-                        fontSize: size.width * 0.045,
-                        color: const Color.fromRGBO(60, 121, 98, 1.0)),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    "Order 01",
-                    style: TextStyle(
-                        fontSize: size.width * 0.045,
-                        color: const Color.fromRGBO(60, 121, 98, 1.0)),
-                  ),
-                  Text(
-                    "02",
-                    style: TextStyle(
-                        fontSize: size.width * 0.045,
-                        color: const Color.fromRGBO(60, 121, 98, 1.0)),
-                  ),
-                  Text(
-                    "200",
-                    style: TextStyle(
-                        fontSize: size.width * 0.045,
-                        color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                  Container(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      eggtotal.toString(),
+                      style: TextStyle(
+                          fontSize: size.width * 0.045,
+                          color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                    ),
                   ),
                 ],
               ),
-              Text(
-                "Total",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: size.width * 0.05,
-                    color: const Color.fromRGBO(60, 121, 98, 1.0)),
+              TableRow(
+                children: [
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Chicken",
+                      style: TextStyle(
+                          fontSize: size.width * 0.045,
+                          color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      widget.chicken_count.toString(),
+                      style: TextStyle(
+                          fontSize: size.width * 0.045,
+                          color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      widget.chicken_price.toString(),
+                      style: TextStyle(
+                          fontSize: size.width * 0.045,
+                          color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                    ),
+                  ),
+                ],
               ),
             ],
-          )
+          ),
+          Text(
+            "Total: Rs." + widget.total.toString(),
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: size.width * 0.05,
+                color: const Color.fromRGBO(60, 121, 98, 1.0)),
+          ),
         ],
       ),
     );
