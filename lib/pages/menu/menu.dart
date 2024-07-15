@@ -168,7 +168,7 @@ class _menupageState extends State<menupage> {
                     Stack(
                       children: <Widget>[
                         Image(
-                          image: AssetImage("assets/profile.png"),
+                          image: AssetImage("assets/cart.png"),
                           width: size.width * 0.12,
                         ),
                         Positioned.fill(
@@ -181,7 +181,9 @@ class _menupageState extends State<menupage> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => orderpage()));
+                                        builder: (context) => orderpage(
+                                              mobilenumber: mobile_number,
+                                            )));
                               },
                             ),
                           ),
